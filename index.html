@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code — Xây dựng ứng dụng hoàn chỉnh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#DF6B33',
+            dark: '#090A14',
+            darker: '#0F1121',
+          },
+          fontFamily: {
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #090A14;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #DF6B33, #F4A261, #DF6B33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-primary {
+      background: #DF6B33;
+      color: white;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: #B85A28;
+      transform: scale(0.97);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #3A3F5C;
+      color: #C8CBD8;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: #DF6B33;
+      color: #DF6B33;
+      transform: scale(0.97);
+    }
+
+    .card-hover:hover {
+      border-color: #DF6B33;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+    }
+
+    .faq-chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-chevron.open {
+      transform: rotate(180deg);
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .float-anim {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #090A14;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #DF6B33;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="font-body text-[#C8CBD8]">
+
+  <!-- 1. NAVIGATION -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#090A14]/90 backdrop-blur-md border-b border-[#1A1D2E]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="font-heading font-extrabold text-2xl text-primary">Claude Code</a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#chuong-trinh" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Chương trình</a>
+          <a href="#danh-cho-ai" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Đối tượng</a>
+          <a href="#hoc-vien" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Học viên</a>
+          <a href="#faq" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">FAQ</a>
+        </div>
+        <a href="#dang-ky" class="btn-primary px-5 py-2.5 rounded-lg font-heading font-bold text-sm">Đăng Ký Ngay</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 2. HERO SECTION -->
+  <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left">
+          <h1 class="font-heading font-extrabold text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] leading-tight mb-6">
+            Xây dựng ứng dụng với <br><span class="gradient-text">Claude Code</span>
+          </h1>
+          <p class="text-base sm:text-lg text-[#8A8FA0] mb-8 max-w-lg mx-auto lg:mx-0">
+            Khóa học 8 buổi (16 tiết) trang bị kỹ năng thực chiến — từ cài đặt đến triển khai sản phẩm hoàn chỉnh
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-10">
+            <a href="#dang-ky" class="btn-primary px-8 py-3.5 rounded-xl font-heading font-bold text-base text-center">Đăng Ký
+              Khóa Học</a>
+            <a href="#chuong-trinh"
+              class="btn-secondary px-8 py-3.5 rounded-xl font-heading font-semibold text-base text-center">Xem Demo</a>
+          </div>
+          <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
+            <div class="text-center">
+              <div class="font-heading font-extrabold text-2xl text-primary">16</div>
+              <div class="text-xs text-[#8A8FA0] mt-1">tiết học</div>
+            </div>
+            <div class="w-px bg-[#1A1D2E]"></div>
+            <div class="text-center">
+              <div class="font-heading font-extrabold text-2xl text-primary">8</div>
+              <div class="text-xs text-[#8A8FA0] mt-1">buổi thực chiến</div>
+            </div>
+            <div class="w-px bg-[#1A1D2E]"></div>
+            <div class="text-center">
+              <div class="font-heading font-extrabold text-2xl text-primary">Deploy</div>
+              <div class="text-xs text-[#8A8FA0] mt-1">thực tế</div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden lg:flex justify-center">
+          <div
+            class="w-full max-w-sm aspect-square rounded-2xl bg-gradient-to-br from-[#1A1D2E] to-[#141627] border border-[#252A40] flex items-center justify-center float-anim">
+            <div class="text-center p-8">
+              <div class="font-heading font-extrabold text-5xl gradient-text mb-4">&lt;/&gt;</div>
+              <div class="font-heading font-bold text-xl text-white mb-2">Claude Code</div>
+              <div class="text-sm text-[#8A8FA0]">AI-Powered Development</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROBLEM STATEMENT -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1121]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Bạn đang gặp những vấn đề nào?</h2>
+      <p class="text-[#8A8FA0] mb-12">Những thách thức phổ biến mà lập trình viên gặp phải mỗi ngày</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 text-left transition-colors duration-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="clock" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <div class="font-heading font-bold text-white mb-1">Viết code mất quá nhiều thời gian</div>
+              <div class="text-sm text-[#8A8FA0]">Ngồi hàng giờ tra syntax, copy-paste từ Stack Overflow</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 text-left transition-colors duration-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="brain" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <div class="font-heading font-bold text-white mb-1">Khó ghi nhớ syntax và APIs phức tạp</div>
+              <div class="text-sm text-[#8A8FA0]">Mỗi framework lại có hàng trăm hàm, chẳng ai nhớ hết được</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 text-left transition-colors duration-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="git-branch" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <div class="font-heading font-bold text-white mb-1">Sợ làm hỏng code khi refactoring</div>
+              <div class="text-sm text-[#8A8FA0]">E dè sửa một dòng vì sợ break toàn bộ hệ thống</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 text-left transition-colors duration-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i data-lucide="compass" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <div class="font-heading font-bold text-white mb-1">Muốn tự động hóa nhưng không biết bắt đầu từ đâu</div>
+              <div class="text-sm text-[#8A8FA0]">Nhìn đồng nghiệp dùng AI hiệu quả mà không rõ cách áp dụng</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SOLUTION SECTION -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Giải Pháp Toàn Diện Cho Bạn</h2>
+        <p class="text-[#8A8FA0] max-w-2xl mx-auto">
+          Khóa học 8 buổi tập trung thực chiến, học cách sử dụng Claude Code để xây dựng ứng dụng hoàn chỉnh từ Firebase Backend
+          đến Frontend, deploy lên Vercel
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 text-center transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="target" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-2 text-sm">Hướng dẫn từng bước chi tiết</div>
+          <div class="text-xs text-[#8A8FA0]">8 buổi thực chiến có lộ trình rõ ràng</div>
+        </div>
+        <div class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 text-center transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="wrench" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-2 text-sm">16 tiết học thực hành</div>
+          <div class="text-xs text-[#8A8FA0]">Bài tập thực tế áp dụng ngay vào dự án</div>
+        </div>
+        <div class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 text-center transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="lightbulb" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-2 text-sm">Học từ dự án thực tế</div>
+          <div class="text-xs text-[#8A8FA0]">ProjectOS — Enterprise Project thực chiến</div>
+        </div>
+        <div class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 text-center transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="video" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-2 text-sm">Video ghi lại buổi học</div>
+          <div class="text-xs text-[#8A8FA0]">Xem lại toàn bộ nội dung mọi lúc</div>
+        </div>
+        <div class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 text-center transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mx-auto mb-4">
+            <i data-lucide="users" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-2 text-sm">Cộng đồng học viên</div>
+          <div class="text-xs text-[#8A8FA0]">Group Zalo hỗ trợ sau khóa học</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TARGET AUDIENCE -->
+  <section id="danh-cho-ai" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1121]">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Khóa Học Dành Cho Ai?</h2>
+        <p class="text-[#8A8FA0]">Phù hợp với mọi đối tượng muốn làm chủ Claude Code</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mb-4">
+            <i data-lucide="graduation-cap" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-3">Sinh viên năm 3-4 & mới ra trường</div>
+          <div class="text-sm text-[#8A8FA0]">Lương khởi điểm 10-15 triệu — điểm khởi đầu sự nghiệp vững chắc</div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mb-4">
+            <i data-lucide="briefcase" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-3">Người đi làm muốn nâng cấp kỹ năng</div>
+          <div class="text-sm text-[#8A8FA0]">Fresher, IT Support, Tester — nâng tầm hiệu quả công việc</div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mb-4">
+            <i data-lucide="palette" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-3">Người không chuyên kỹ thuật</div>
+          <div class="text-sm text-[#8A8FA0]">PM, Designer, Entrepreneur — tự xây sản phẩm mà không cần code giỏi</div>
+        </div>
+        <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-xl p-6 transition-colors duration-200">
+          <div class="w-12 h-12 rounded-xl bg-[#1A1D2E] flex items-center justify-center mb-4">
+            <i data-lucide="cpu" class="w-6 h-6 text-primary"></i>
+          </div>
+          <div class="font-heading font-bold text-white mb-3">Developer đã có nền tảng</div>
+          <div class="text-sm text-[#8A8FA0]">Làm chủ AI-native development, nâng tốc độ lên 3-5 lần</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. COURSE CONTENT -->
+  <section id="chuong-trinh" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Chương Trình 8 Buổi</h2>
+        <p class="text-[#8A8FA0]">16 tiết học thực chiến, hoàn thành project có thể deploy</p>
+      </div>
+      <div class="relative">
+        <div class="absolute left-8 top-0 bottom-0 w-px bg-[#1A1D2E] hidden sm:block"></div>
+        <div class="space-y-4">
+          <!-- Session 1 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">1</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 1: Làm quen Claude Code</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">0,5
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Cài đặt, cấu hình & luồng làm việc cơ bản</div>
+            </div>
+          </div>
+          <!-- Session 2 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">2</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 2: Prompt Engineering thực chiến</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">0,5
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Viết prompt hiệu quả để điều khiển AI đúng ý</div>
+            </div>
+          </div>
+          <!-- Session 3 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">3</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 3: Thiết kế kiến trúc ứng dụng cùng AI</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">4
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Phân tích yêu cầu, thiết kế database, API schema với sự hỗ trợ của AI</div>
+            </div>
+          </div>
+          <!-- Session 4 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">4</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 4: Xây dựng Backend với Firebase</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">4
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Firebase Auth, Firestore, Cloud Functions — backend hoàn chỉnh</div>
+            </div>
+          </div>
+          <!-- Session 5 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">5</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 5: Xây dựng Frontend</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">4
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">UI components, kết nối Firebase, xử lý nghiệp vụ logic</div>
+            </div>
+          </div>
+          <!-- Session 6 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">6</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 6: Debug & Refactor cùng AI</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">1
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Tìm và sửa lỗi, tối ưu code với sự hỗ trợ của AI</div>
+            </div>
+          </div>
+          <!-- Session 7 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div
+              class="absolute left-4 top-8 w-8 h-8 rounded-full bg-[#090A14] border-2 border-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-primary">7</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 7: Tích hợp tính năng nâng cao</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">1
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Notifications, real-time data, advanced features</div>
+            </div>
+          </div>
+          <!-- Session 8 -->
+          <div
+            class="bg-[#0F1121] border border-[#1A1D2E] card-hover rounded-xl p-5 sm:p-6 transition-colors duration-200 relative">
+            <div class="absolute left-4 top-8 w-8 h-8 rounded-full bg-primary hidden sm:flex items-center justify-center">
+              <span class="font-heading font-bold text-xs text-white">8</span>
+            </div>
+            <div class="sm:pl-14">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <div class="font-heading font-bold text-white">Buổi 8: Deploy & Hoàn thiện sản phẩm</div>
+                <span class="text-xs text-primary font-heading font-semibold bg-[#1A1D2E] px-3 py-1 rounded-full w-fit">1
+                  tiết</span>
+              </div>
+              <div class="text-sm text-[#8A8FA0]">Deploy lên Vercel, tối ưu production, final review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SOCIAL PROOF -->
+  <section id="hoc-vien" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1121]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-12">Sản Phẩm Học Viên</h2>
+      <div class="bg-[#090A14] border border-[#1A1D2E] card-hover rounded-2xl p-8 sm:p-10 transition-colors duration-200">
+        <div class="inline-flex items-center gap-2 bg-[#1A1D2E] rounded-full px-4 py-1.5 mb-6">
+          <i data-lucide="star" class="w-4 h-4 text-[#F4A261]"></i>
+          <span class="text-xs font-heading font-semibold text-[#F4A261]">Project thực chiến</span>
+        </div>
+        <div class="font-heading font-extrabold text-2xl sm:text-3xl text-white mb-2">ProjectOS — Enterprise Project</div>
+        <div class="text-sm text-primary mb-6">project-management.vercel.app</div>
+        <blockquote class="text-base sm:text-lg text-[#8A8FA0] italic mb-8 max-w-xl mx-auto">
+          "Lập trình viên tương lai không phải người viết code nhanh nhất. Họ là người biết hướng dẫn AI tốt nhất."
+        </blockquote>
+        <div class="flex flex-wrap gap-6 justify-center">
+          <div>
+            <div class="font-heading font-extrabold text-2xl text-primary">100%</div>
+            <div class="text-xs text-[#8A8FA0] mt-1">Học viên hoàn thành project</div>
+          </div>
+          <div class="w-px bg-[#1A1D2E]"></div>
+          <div>
+            <div class="font-heading font-extrabold text-2xl text-primary">Deploy</div>
+            <div class="text-xs text-[#8A8FA0] mt-1">thực tế lên Vercel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CTA SECTION -->
+  <section id="dang-ky" class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Sẵn Sàng Bắt Đầu Chưa?</h2>
+      <p class="text-[#8A8FA0] mb-10">Đăng ký nhận thông tin khóa học — chúng tôi sẽ liên hệ lại cho bạn</p>
+      <form class="space-y-4 mb-6" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm nhất.');">
+        <input type="text" placeholder="Họ và tên" required
+          class="w-full bg-[#0F1121] border border-[#1A1D2E] rounded-xl px-5 py-3.5 text-sm text-[#C8CBD8] placeholder-[#4A4F6A] focus:outline-none focus:border-primary transition-colors">
+        <input type="email" placeholder="Email của bạn" required
+          class="w-full bg-[#0F1121] border border-[#1A1D2E] rounded-xl px-5 py-3.5 text-sm text-[#C8CBD8] placeholder-[#4A4F6A] focus:outline-none focus:border-primary transition-colors">
+        <button type="submit" class="btn-primary w-full px-8 py-3.5 rounded-xl font-heading font-bold text-base">Đăng Ký
+          Ngay</button>
+      </form>
+      <a href="tel:02363779779"
+        class="inline-flex items-center gap-2 text-sm text-[#8A8FA0] hover:text-primary transition-colors">
+        <i data-lucide="phone" class="w-4 h-4"></i>
+        Liên Hệ Hỗ Trợ — 0236.3.779.779
+      </a>
+    </div>
+  </section>
+
+  <!-- 9. FAQ SECTION -->
+  <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1121]">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mb-4">Câu Hỏi Thường Gặp</h2>
+      </div>
+      <div class="space-y-3">
+        <!-- FAQ 1 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Tôi là người mới bắt đầu, có học được
+              không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Hoàn toàn được! Khóa học được thiết kế từ cơ bản đến nâng cao.
+              Buổi 1-2 sẽ giúp bạn nắm vững nền tảng trước khi đi vào thực hành. Hơn nữa, đội ngũ giảng viên và group Zalo luôn
+              hỗ trợ bạn trong suốt quá trình học.</p>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Khóa này dành cho những ai?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Khóa học phù hợp với sinh viên năm 3-4, người đi làm muốn nâng cấp
+              kỹ năng (Fresher, IT Support, Tester), người không chuyên kỹ thuật muốn tự xây sản phẩm (PM, Designer), và
+              developer có nền tảng muốn làm AI-native.</p>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Tôi bao giờ hoàn thành?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Với 8 buổi (16 tiết) trong khoảng 2-3 tuần, bạn sẽ có một sản phẩm
+              hoàn chỉnh có thể deploy. Tốc độ hoàn thành phụ thuộc vào thời gian bạn dành cho bài tập thực hành giữa các buổi.
+            </p>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Có hỗ trợ sau khi mua không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Có! Bạn sẽ được tham gia Group Zalo học viên để được hỗ trợ sau
+              khóa học. Đội ngũ giảng viên và cộng đồng học viên luôn sẵn sàng giải đáp thắc mắc. Video ghi lại buổi học cũng
+              được cung cấp để xem lại mọi lúc.</p>
+          </div>
+        </div>
+        <!-- FAQ 5 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Nếu tôi không hài lòng thì sao?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Chúng tôi tự tin về chất lượng khóa học. Nếu trong buổi đầu tiên
+              bạn cảm thấy không phù hợp, hãy liên hệ để được hỗ trợ hoàn tiền hoặc chuyển đổi khóa học khác.</p>
+          </div>
+        </div>
+        <!-- FAQ 6 -->
+        <div class="bg-[#090A14] border border-[#1A1D2E] rounded-xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 text-left" onclick="toggleFaq(this)">
+            <span class="font-heading font-bold text-white text-sm sm:text-base pr-4">Tôi có truy cập vĩnh viễn không?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-primary flex-shrink-0 faq-chevron"></i>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-sm text-[#8A8FA0] leading-relaxed">Có! Sau khi đăng ký, bạn có quyền truy cập vĩnh viễn vào video
+              buổi học, tài liệu và cộng đồng học viên. Đây là đầu tư một lần, học mãi mãi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FOOTER -->
+  <footer class="py-16 px-4 sm:px-6 lg:px-8 border-t border-[#1A1D2E]">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div>
+          <div class="font-heading font-extrabold text-2xl text-primary mb-4">Claude Code</div>
+          <p class="text-sm text-[#8A8FA0] mb-3">Softech Aptech — Đào tạo lập trình thực chiến</p>
+          <p class="text-sm text-[#8A8FA0]">24 Lê Thánh Tôn, Đà Nẵng</p>
+          <a href="tel:02363779779" class="text-sm text-primary hover:underline mt-2 inline-block">Hotline: 0236.3.779.779</a>
+        </div>
+        <!-- Links -->
+        <div>
+          <div class="font-heading font-bold text-white mb-4">Liên Kết</div>
+          <ul class="space-y-2">
+            <li><a href="#chuong-trinh" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Chương trình</a>
+            </li>
+            <li><a href="#danh-cho-ai" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Đối tượng</a></li>
+            <li><a href="#hoc-vien" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">Sản phẩm</a></li>
+            <li><a href="#faq" class="text-sm text-[#8A8FA0] hover:text-[#C8CBD8] transition-colors">FAQ</a></li>
+          </ul>
+        </div>
+        <!-- Social -->
+        <div>
+          <div class="font-heading font-bold text-white mb-4">Kết Nối</div>
+          <div class="flex gap-3">
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center hover:bg-[#252A40] transition-colors">
+              <i data-lucide="facebook" class="w-5 h-5 text-[#8A8FA0]"></i>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center hover:bg-[#252A40] transition-colors">
+              <svg class="w-5 h-5 text-[#8A8FA0]" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-[#1A1D2E] flex items-center justify-center hover:bg-[#252A40] transition-colors">
+              <i data-lucide="linkedin" class="w-5 h-5 text-[#8A8FA0]"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Newsletter -->
+        <div>
+          <div class="font-heading font-bold text-white mb-4">Nhận tips Claude Code miễn phí</div>
+          <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Đăng ký thành công!');">
+            <input type="email" placeholder="Email" required
+              class="flex-1 bg-[#1A1D2E] border border-[#252A40] rounded-lg px-3 py-2 text-sm text-[#C8CBD8] placeholder-[#4A4F6A] focus:outline-none focus:border-primary transition-colors min-w-0">
+            <button type="submit"
+              class="btn-primary px-4 py-2 rounded-lg font-heading font-bold text-sm flex-shrink-0">Gửi</button>
+          </form>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-[#1A1D2E] text-center">
+        <p class="text-sm text-[#4A4F6A]">© 2026 Softech Aptech. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleFaq(button) {
+      const answer = button.nextElementSibling;
+      const chevron = button.querySelector('.faq-chevron');
+      const isOpen = answer.classList.contains('open');
+
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('open'));
+
+      if (!isOpen) {
+        answer.classList.add('open');
+        chevron.classList.add('open');
+      }
+    }
+  </script>
+</body>
+
+</html>
