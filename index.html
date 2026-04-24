@@ -2271,15 +2271,15 @@
         const planetData = [
           // Thuỷ (Mercury) - gần Mặt Trời nhất
           {
-            name: 'Mercury', dist: baseSize * 0.12, size: 3,
+            name: 'Mercury', dist: baseSize * 0.12, size: 5,
             color: '#B5B5B5', accent: '#8C8C8C', speed: 0.003,
             glow: '#D4D4D4', ring: false, tilt: 0.2,
             surface: 'crater',
-            orbitAngle: Math.PI * 0.6, // start position
+            orbitAngle: Math.PI * 0.6,
           },
           // Kim (Venus) - lớn hơn, vàng trắng, mật độ khí
           {
-            name: 'Venus', dist: baseSize * 0.18, size: 5.5,
+            name: 'Venus', dist: baseSize * 0.18, size: 9,
             color: '#E8CDA0', accent: '#D4A855', speed: 0.0018,
             glow: '#FFD4A8', ring: false, tilt: 0.1,
             surface: 'swirl',
@@ -2287,7 +2287,7 @@
           },
           // Trái Đất - xanh với lục địa
           {
-            name: 'Earth', dist: baseSize * 0.25, size: 5.8,
+            name: 'Earth', dist: baseSize * 0.25, size: 9.5,
             color: '#4A90D9', accent: '#2E8B57', speed: 0.0012,
             glow: '#87CEEB', ring: false, tilt: 0.4,
             surface: 'continent',
@@ -2295,7 +2295,7 @@
           },
           // Hỏa (Mars) - đỏ gạch, nhỏ hơn
           {
-            name: 'Mars', dist: baseSize * 0.31, size: 4,
+            name: 'Mars', dist: baseSize * 0.31, size: 6.5,
             color: '#C1440E', accent: '#8B3A0E', speed: 0.0009,
             glow: '#E76F51', ring: false, tilt: 0.3,
             surface: 'rust',
@@ -2303,7 +2303,7 @@
           },
           // Mộc (Jupiter) - lớn nhất, có dải khí
           {
-            name: 'Jupiter', dist: baseSize * 0.38, size: 9,
+            name: 'Jupiter', dist: baseSize * 0.38, size: 14,
             color: '#C88B3A', accent: '#A05C2C', speed: 0.0005,
             glow: '#DEB887', ring: false, tilt: 0.15,
             surface: 'stripe',
@@ -2311,7 +2311,7 @@
           },
           // Thổ (Saturn) - có vành đai
           {
-            name: 'Saturn', dist: baseSize * 0.46, size: 7.5,
+            name: 'Saturn', dist: baseSize * 0.46, size: 12,
             color: '#E8D5A3', accent: '#C9A86C', speed: 0.00035,
             glow: '#F4E4BC', ring: true, tilt: 0.5,
             surface: 'band',
@@ -2319,7 +2319,7 @@
           },
           // Diêm Vương (Pluto) - xa nhất, nhỏ, băng giá
           {
-            name: 'Pluto', dist: baseSize * 0.52, size: 2.2,
+            name: 'Pluto', dist: baseSize * 0.52, size: 3.5,
             color: '#B0A090', accent: '#D4C4B0', speed: 0.00022,
             glow: '#C0B0A0', ring: false, tilt: 1.2,
             surface: 'ice',
@@ -2347,56 +2347,82 @@
         });
       }
 
-      function drawGalaxyCore() {
-        // Solar corona - multiple glow layers
+      let sunShimmerTime = 0;
+
+      function drawSun() {
+        sunShimmerTime += 0.8;
+        const sunR = Math.min(width, height) * 0.034;
+
+        // Heat shimmer - irregular flame blobs around edge
+        ctx.save();
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          const wobble = 1 + Math.sin(sunShimmerTime * 0.025 + i * 0.9) * 0.06
+                       + Math.sin(sunShimmerTime * 0.018 + i * 1.4) * 0.04;
+          const r = sunR * wobble;
+          const px = cx + Math.cos(angle) * r;
+          const py = cy + Math.sin(angle) * r;
+          ctx.beginPath();
+          ctx.arc(px, py, sunR * 0.15, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 120, 20, 0.05)';
+          ctx.fill();
+        }
+        // Second outer ring - wider, softer
+        for (let i = 0; i < 16; i++) {
+          const angle = (i / 16) * Math.PI * 2 + sunShimmerTime * 0.003;
+          const r = sunR * (1.1 + Math.sin(sunShimmerTime * 0.02 + i * 1.3) * 0.08);
+          const px = cx + Math.cos(angle) * r;
+          const py = cy + Math.sin(angle) * r;
+          ctx.beginPath();
+          ctx.arc(px, py, sunR * 0.25, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 90, 10, 0.05)';
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Soft corona glow - 3 layers only
         const coronaLayers = [
-          { radius: 200, alpha: 0.015, color: '#FFD700' },
-          { radius: 140, alpha: 0.025, color: '#FFA500' },
-          { radius: 90, alpha: 0.05, color: '#FF8C00' },
-          { radius: 55, alpha: 0.12, color: '#FF6600' },
-          { radius: 35, alpha: 0.25, color: '#FF4500' },
+          { r: sunR * 2.5, alpha: 0.04, col: '#FFB347' },
+          { r: sunR * 1.6, alpha: 0.08, col: '#FF8C00' },
+          { r: sunR * 1.15, alpha: 0.15, col: '#FF6600' },
         ];
         coronaLayers.forEach(l => {
-          const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, l.radius);
-          grd.addColorStop(0, l.color + Math.round(l.alpha * 255).toString(16).padStart(2, '0'));
+          const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, l.r);
+          grd.addColorStop(0, l.col + Math.round(l.alpha * 255).toString(16).padStart(2, '0'));
           grd.addColorStop(1, 'transparent');
           ctx.beginPath();
-          ctx.arc(cx, cy, l.radius, 0, Math.PI * 2);
+          ctx.arc(cx, cy, l.r, 0, Math.PI * 2);
           ctx.fillStyle = grd;
           ctx.fill();
         });
 
-        // Solar flares (rays)
-        const flareCount = 12;
-        const baseRadius = 18;
-        for (let i = 0; i < flareCount; i++) {
-          const angle = (i / flareCount) * Math.PI * 2;
-          const len = baseRadius + 8 + Math.sin(performance.now() * 0.001 + i) * 6;
-          const x2 = cx + Math.cos(angle) * len;
-          const y2 = cy + Math.sin(angle) * len;
-          ctx.save();
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.lineTo(x2, y2);
-          ctx.strokeStyle = 'rgba(255, 220, 100, 0.35)';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-          ctx.restore();
-        }
+        // Simple edge darkening (limb darkening)
+        const limbGrd = ctx.createRadialGradient(cx, cy, sunR * 0.8, cx, cy, sunR);
+        limbGrd.addColorStop(0, 'rgba(0,0,0,0)');
+        limbGrd.addColorStop(1, 'rgba(0,0,0,0.4)');
 
-        // Inner bright core
-        const innerGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseRadius);
-        innerGrd.addColorStop(0, '#FFFFFF');
-        innerGrd.addColorStop(0.3, '#FFF8DC');
-        innerGrd.addColorStop(0.7, '#FFD700');
-        innerGrd.addColorStop(1, '#FF8C00');
+        // Sun surface with gradient
+        ctx.save();
         ctx.beginPath();
-        ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2);
-        ctx.fillStyle = innerGrd;
-        ctx.shadowBlur = 30;
-        ctx.shadowColor = '#FFD700';
+        ctx.arc(cx, cy, sunR, 0, Math.PI * 2);
+        ctx.clip();
+
+        const surfGrd = ctx.createRadialGradient(
+          cx - sunR * 0.1, cy - sunR * 0.1, 0,
+          cx, cy, sunR
+        );
+        surfGrd.addColorStop(0,   '#FFF5E0');
+        surfGrd.addColorStop(0.4, '#FFCC66');
+        surfGrd.addColorStop(0.75,'#FF9933');
+        surfGrd.addColorStop(1,   '#E65700');
+        ctx.fillStyle = surfGrd;
+        ctx.fillRect(cx - sunR, cy - sunR, sunR * 2, sunR * 2);
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, sunR, 0, Math.PI * 2);
+        ctx.fillStyle = limbGrd;
         ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.restore();
       }
 
       function drawSpiralArms() {
@@ -2422,12 +2448,19 @@
           const pulseAlpha = o.opacity * (0.5 + 0.5 * Math.sin(o.pulse));
 
           ctx.save();
-          ctx.shadowBlur = o.size > 1.5 ? 10 : 4;
+          ctx.shadowBlur = o.size > 1.5 ? 6 : 3;
           ctx.shadowColor = o.color;
           ctx.beginPath();
           ctx.arc(o.x, o.y, o.size, 0, Math.PI * 2);
           ctx.fillStyle = o.color;
           ctx.globalAlpha = pulseAlpha;
+          ctx.fill();
+          // Crisp point
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(o.x, o.y, o.size * 0.4, 0, Math.PI * 2);
+          ctx.globalAlpha = pulseAlpha * 0.5;
           ctx.fill();
           ctx.restore();
         });
@@ -2478,8 +2511,8 @@
 
           // ─── Glow aura ───
           const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3.5);
-          grd.addColorStop(0, p.glow + '50');
-          grd.addColorStop(0.5, p.glow + '20');
+          grd.addColorStop(0, p.glow + '40');
+          grd.addColorStop(0.5, p.glow + '15');
           grd.addColorStop(1, 'transparent');
           ctx.beginPath();
           ctx.arc(p.x, p.y, size * 3.5, 0, Math.PI * 2);
@@ -2489,7 +2522,7 @@
           ctx.globalAlpha = 1;
 
           // ─── Planet surface (per type) ───
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 10;
           ctx.shadowColor = p.glow;
 
           ctx.beginPath();
@@ -2598,6 +2631,14 @@
           }
 
           ctx.fill();
+
+          // Crisp rim edge
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+
           ctx.restore();
         });
       }
@@ -2608,13 +2649,19 @@
           const alpha = s.opacity * (0.4 + 0.6 * Math.sin(s.twinkle));
           ctx.save();
           if (s.size > 1.2) {
-            ctx.shadowBlur = 6;
+            ctx.shadowBlur = 4;
             ctx.shadowColor = s.color;
           }
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
           ctx.fillStyle = s.color;
           ctx.globalAlpha = alpha;
+          ctx.fill();
+          // Bright core
+          ctx.globalAlpha = alpha * 0.8;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
           ctx.fill();
           ctx.restore();
         });
@@ -2679,7 +2726,7 @@
         ctx.clearRect(0, 0, width, height);
         const time = performance.now();
 
-        drawGalaxyCore();
+        drawSun();
         drawSpiralArms();
         drawOrbiters(time);
         drawPlanets();
