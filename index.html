@@ -455,26 +455,32 @@
 
     /* ─── Card Hover ─── */
     .card-hover {
-      border: 1px solid #1a1a2e;
+      border: 1px solid rgba(26, 26, 46, 0.7);
+      background: rgba(13, 13, 26, 0.75) !important;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
 
     .card-hover:hover {
       border-color: #DF6B33;
+      background: rgba(13, 13, 26, 0.85) !important;
       box-shadow: 0 0 24px rgba(223, 107, 51, 0.12), 0 4px 24px rgba(0, 0, 0, 0.3);
       transform: translateY(-3px);
     }
 
     /* ─── Pricing Cards ─── */
     .pricing-card {
-      background: linear-gradient(180deg, #0d0d1a 0%, #101223 100%);
-      border: 1px solid #1f2235;
+      background: rgba(13, 13, 26, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(31, 34, 53, 0.7);
     }
 
     .pricing-card--highlight {
       border-color: rgba(223, 107, 51, 0.5);
       box-shadow: 0 0 0 1px rgba(223, 107, 51, 0.2), 0 14px 30px rgba(223, 107, 51, 0.16);
-      background: linear-gradient(160deg, #1a1310 0%, #231711 48%, #18110d 100%);
+      background: rgba(26, 19, 16, 0.82);
     }
 
     .pricing-card--highlight:hover {
@@ -507,6 +513,8 @@
       border: 1px solid rgba(244, 162, 97, 0.26);
       border-radius: 10px;
       background: rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       padding: 8px 6px;
       text-align: center;
     }
@@ -561,8 +569,17 @@
 
     /* ─── Section Divider ─── */
     .section-divider {
+      position: relative;
+      z-index: 1;
       height: 1px;
       background: linear-gradient(90deg, transparent, #1a1a2e, transparent);
+    }
+
+    .content-section,
+    .hero-content-wrapper,
+    section[aria-labelledby] {
+      position: relative;
+      z-index: 10;
     }
 
     /* ─── Nav Reading Progress ─── */
@@ -582,6 +599,7 @@
     /* ─── Hero Dot Grid Background ─── */
     .hero-bg {
       position: relative;
+      z-index: 1;
       background:
         radial-gradient(120% 100% at 0% 0%, rgba(223, 107, 51, 0.08) 0%, rgba(223, 107, 51, 0) 48%),
         radial-gradient(95% 90% at 100% 10%, rgba(244, 162, 97, 0.07) 0%, rgba(244, 162, 97, 0) 52%),
@@ -598,7 +616,7 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      z-index: 1;
+      z-index: 0;
     }
 
 
@@ -609,7 +627,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 99999;
     }
 
     .comet-particle {
@@ -1094,13 +1112,14 @@
     </div>
   </nav>
 
+  <div id="comet-trail" aria-hidden="true"></div>
+
   <main class="pt-16" id="main-content">
 
     <!-- HERO SECTION -->
     <section class="hero-bg relative overflow-hidden min-h-screen flex items-center">
       <!-- Full-section galaxy layers -->
       <canvas id="hero-particle-canvas" aria-hidden="true"></canvas>
-      <div id="comet-trail" aria-hidden="true"></div>
       <div class="ambient-glow" style="top:-80px;left:-60px;"></div>
       <div class="ambient-glow" style="bottom:-60px;right:-80px;animation-delay:-2s;"></div>
 
@@ -1357,174 +1376,118 @@
         <p class="text-gray-500 text-center mb-4 text-sm">16 tiết học thực chiến, hoàn thành project có thể deploy</p>
         <p class="text-primary/80 text-center mb-12 text-xs font-semibold">Từ cài đặt cơ bản đến deploy sản phẩm hoàn chỉnh</p>
       </div>
-      <div class="max-w-3xl mx-auto space-y-3">
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">1</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 1: Làm quen Claude Code</div>
-                <div class="text-gray-500 text-xs mt-0.5">Cài đặt, cấu hình & luồng làm việc cơ bản</div>
-              </div>
+      <div class="max-w-3xl mx-auto grid sm:grid-cols-2 gap-3">
+        <!-- Session 1 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">1</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">0,5 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 1: Làm quen Claude Code</div>
+              <div class="text-gray-400 text-xs mt-0.5">Cài đặt, cấu hình & luồng làm việc cơ bản</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Tìm hiểu cách cài đặt Claude Code, cấu hình môi trường, và nắm được
-              luồng làm việc cơ bản để bắt đầu xây dựng ứng dụng.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">0,5 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Tìm hiểu cách cài đặt Claude Code, cấu hình môi trường, và nắm được luồng làm việc cơ bản để bắt đầu xây dựng ứng dụng.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">2</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 2: Prompt Engineering thực chiến</div>
-                <div class="text-gray-500 text-xs mt-0.5">Viết prompt hiệu quả để điều khiển AI</div>
-              </div>
+        <!-- Session 2 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">2</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">0,5 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 2: Prompt Engineering thực chiến</div>
+              <div class="text-gray-400 text-xs mt-0.5">Viết prompt hiệu quả để điều khiển AI</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Học cách viết prompt rõ ràng, có cấu trúc để Claude Code hiểu đúng yêu
-              cầu và trả ra code chất lượng cao.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">0,5 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Học cách viết prompt rõ ràng, có cấu trúc để Claude Code hiểu đúng yêu cầu và trả ra code chất lượng cao.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">3</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 3: Thiết kế kiến trúc ứng dụng cùng AI</div>
-                <div class="text-gray-500 text-xs mt-0.5">Lên kế hoạch, chọn công nghệ, vẽ sơ đồ</div>
-              </div>
+        <!-- Session 3 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">3</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">4 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 3: Thiết kế kiến trúc ứng dụng cùng AI</div>
+              <div class="text-gray-400 text-xs mt-0.5">Lên kế hoạch, chọn công nghệ, vẽ sơ đồ</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Sử dụng AI để thiết kế kiến trúc ứng dụng, lựa chọn công nghệ phù hợp,
-              và vẽ sơ đồ hệ thống trước khi bắt đầu code.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">4 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Sử dụng AI để thiết kế kiến trúc ứng dụng, lựa chọn công nghệ phù hợp, và vẽ sơ đồ hệ thống trước khi bắt đầu code.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">4</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 4: Xây dựng Backend với Firebase</div>
-                <div class="text-gray-500 text-xs mt-0.5">Firestore, Auth, Functions, Security Rules</div>
-              </div>
+        <!-- Session 4 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">4</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">4 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 4: Xây dựng Backend với Firebase</div>
+              <div class="text-gray-400 text-xs mt-0.5">Firestore, Auth, Functions, Security Rules</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Xây dựng Backend hoàn chỉnh với Firebase: Firestore database,
-              Authentication, Cloud Functions và Security Rules.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">4 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Xây dựng Backend hoàn chỉnh với Firebase: Firestore database, Authentication, Cloud Functions và Security Rules.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">5</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 5: Xây dựng Frontend</div>
-                <div class="text-gray-500 text-xs mt-0.5">UI, kết nối Firebase, xử lý nghiệp vụ</div>
-              </div>
+        <!-- Session 5 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">5</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">4 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 5: Xây dựng Frontend</div>
+              <div class="text-gray-400 text-xs mt-0.5">UI, kết nối Firebase, xử lý nghiệp vụ</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Xây dựng giao diện người dùng, kết nối với Firebase Backend, và
-              implement các logic nghiệp vụ hoàn chỉnh.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">4 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Xây dựng giao diện người dùng, kết nối với Firebase Backend, và implement các logic nghiệp vụ hoàn chỉnh.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">6</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 6: Debug & Refactor cùng AI</div>
-                <div class="text-gray-500 text-xs mt-0.5">Tìm và sửa lỗi, tối ưu code với Claude Code</div>
-              </div>
+        <!-- Session 6 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">6</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">1 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 6: Debug & Refactor cùng AI</div>
+              <div class="text-gray-400 text-xs mt-0.5">Tìm và sửa lỗi, tối ưu code với Claude Code</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Sử dụng Claude Code để debug nhanh, phân tích lỗi, và refactor code để
-              cải thiện performance và maintainability.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">1 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Sử dụng Claude Code để debug nhanh, phân tích lỗi, và refactor code để cải thiện performance và maintainability.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">7</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 7: Tích hợp tính năng nâng cao</div>
-                <div class="text-gray-500 text-xs mt-0.5">Notifications, analytics, monitoring</div>
-              </div>
+        <!-- Session 7 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">7</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">1 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 7: Tích hợp tính năng nâng cao</div>
+              <div class="text-gray-400 text-xs mt-0.5">Notifications, analytics, monitoring</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Tích hợp các tính năng nâng cao như push notifications, analytics, và
-              monitoring để hoàn thiện ứng dụng.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">1 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Tích hợp các tính năng nâng cao như push notifications, analytics, và monitoring để hoàn thiện ứng dụng.</div>
         </div>
-        <div class="faq-item card-hover bg-[#0d0d1a] rounded-xl overflow-hidden">
-          <button class="w-full flex items-center justify-between p-4 text-left" onclick="toggleFaq(this)">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <span class="font-heading font-bold text-primary text-sm">8</span>
-              </div>
-              <div>
-                <div class="font-heading font-semibold text-white text-sm">Buổi 8: Deploy & Hoàn thiện sản phẩm</div>
-                <div class="text-gray-500 text-xs mt-0.5">Deploy lên Vercel, final review</div>
-              </div>
+        <!-- Session 8 -->
+        <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <span class="font-heading font-bold text-primary text-sm">8</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs text-gray-600 bg-[#1a1a2e] px-2 py-0.5 rounded">1 tiết</span>
-              <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 faq-chevron"></i>
+            <div class="flex-1">
+              <div class="font-heading font-semibold text-white text-sm">Buổi 8: Deploy & Hoàn thiện sản phẩm</div>
+              <div class="text-gray-400 text-xs mt-0.5">Deploy lên Vercel, final review</div>
             </div>
-          </button>
-          <div class="faq-answer">
-            <div class="px-4 pb-4 text-gray-400 text-sm">Deploy ứng dụng lên Vercel, tối ưu production build, final review và
-              demo sản phẩm hoàn chỉnh.</div>
+            <span class="text-xs text-gray-500 bg-[#1a1a2e] px-2 py-0.5 rounded shrink-0">1 tiết</span>
           </div>
+          <div class="text-gray-300 text-xs pl-11">Deploy ứng dụng lên Vercel, tối ưu production build, final review và demo sản phẩm hoàn chỉnh.</div>
         </div>
       </div>
     </section>
@@ -1619,7 +1582,7 @@
     <!-- CTA SECTION -->
     <section id="cta" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20" aria-labelledby="cta-heading">
       <div
-        class="bg-gradient-to-br from-[#0d0d1a] to-[#1a1a2e] rounded-2xl p-8 sm:p-12 text-center border border-[#2a2a3e] cta-glow"
+        class="bg-[rgba(13,13,26,0.80)] backdrop-blur-xl rounded-2xl p-8 sm:p-12 text-center border border-[#2a2a3e] cta-glow"
         data-reveal="scale">
         <h2 class="font-heading font-bold text-2xl sm:text-3xl text-white mb-2" id="cta-heading">Sẵn Sàng Bắt Đầu Chưa?</h2>
         <p class="text-gray-500 mb-8 text-sm">Đăng ký nhận thông tin khóa học ngay hôm nay</p>
@@ -2105,7 +2068,7 @@
       if (!finePointer) return;
 
       const particles = [];
-      const MAX_PARTICLES = 32;
+      const MAX_PARTICLES = 16;
       let lastX = -1000, lastY = -1000;
       let rafId = null;
 
@@ -2164,8 +2127,8 @@
         const dy = e.clientY - lastY;
         const speed = Math.sqrt(dx * dx + dy * dy);
 
-        if (speed > 4) {
-          const count = Math.min(Math.floor(speed / 5), 4);
+        if (speed > 8) {
+          const count = Math.min(Math.floor(speed / 8), 2);
           for (let i = 0; i < count; i++) {
             const tx = lastX + dx * ((i + 1) / (count + 1));
             const ty = lastY + dy * ((i + 1) / (count + 1));
