@@ -601,14 +601,6 @@
       z-index: 1;
     }
 
-    .hero-framer-wrap {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.85;
-    }
 
     #comet-trail {
       position: fixed;
@@ -630,85 +622,6 @@
         0 0 4px 1px rgba(255, 255, 255, 0.6),
         0 0 10px 3px rgba(223, 107, 51, 0.5),
         0 0 24px 6px rgba(244, 162, 97, 0.25);
-    }
-    .hero-framer-wrap {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.85;
-    }
-
-    .hero-framer-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px solid rgba(223, 107, 51, 0.12);
-      animation: framer-ring-spin 20s linear infinite;
-    }
-
-    .hero-framer-ring:nth-child(1) {
-      width: 320px;
-      height: 320px;
-      border-color: rgba(223, 107, 51, 0.1);
-    }
-
-    .hero-framer-ring:nth-child(2) {
-      width: 480px;
-      height: 480px;
-      border-color: rgba(244, 162, 97, 0.08);
-      animation-direction: reverse;
-      animation-duration: 28s;
-    }
-
-    .hero-framer-ring:nth-child(3) {
-      width: 640px;
-      height: 640px;
-      border-color: rgba(223, 107, 51, 0.06);
-      animation-duration: 36s;
-    }
-
-    @keyframes framer-ring-spin {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .hero-framer-dot {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(223, 107, 51, 0.6) 0%, rgba(244, 162, 97, 0.2) 60%, transparent 100%);
-      animation: framer-dot-pulse 3s ease-in-out infinite alternate;
-    }
-
-    .hero-framer-dot:nth-child(4) { width: 12px; height: 12px; top: 20%; left: 65%; animation-delay: 0s; }
-    .hero-framer-dot:nth-child(5) { width: 8px; height: 8px; top: 35%; left: 72%; animation-delay: 0.6s; }
-    .hero-framer-dot:nth-child(6) { width: 6px; height: 6px; top: 55%; left: 58%; animation-delay: 1.2s; }
-    .hero-framer-dot:nth-child(7) { width: 10px; height: 10px; top: 70%; left: 45%; animation-delay: 1.8s; }
-    .hero-framer-dot:nth-child(8) { width: 7px; height: 7px; top: 25%; left: 42%; animation-delay: 0.4s; }
-
-    @keyframes framer-dot-pulse {
-      0% { opacity: 0.4; transform: scale(1); }
-      100% { opacity: 0.9; transform: scale(1.4); }
-    }
-
-    .hero-framer-line {
-      position: absolute;
-      background: linear-gradient(90deg, transparent, rgba(223, 107, 51, 0.15), transparent);
-      height: 1px;
-      animation: framer-line-flow 8s ease-in-out infinite alternate;
-    }
-
-    .hero-framer-line:nth-child(9) { width: 200px; top: 30%; left: 40%; transform: rotate(-15deg); animation-delay: 0s; }
-    .hero-framer-line:nth-child(10) { width: 150px; top: 50%; left: 55%; transform: rotate(25deg); animation-delay: 2s; }
-    .hero-framer-line:nth-child(11) { width: 180px; top: 65%; left: 35%; transform: rotate(-8deg); animation-delay: 4s; }
-
-    @keyframes framer-line-flow {
-      0% { opacity: 0; transform: translateX(-20px) rotate(-15deg) scaleX(0.8); }
-      50% { opacity: 1; }
-      100% { opacity: 0; transform: translateX(20px) rotate(-15deg) scaleX(1.2); }
     }
 
     .hero-bg::before {
@@ -872,6 +785,7 @@
     /* ─── Hero Entrance ─── */
     .hero-title {
       animation: hero-title-anim 1.35s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+      line-height: 3.6rem !important;
     }
 
     @keyframes hero-title-anim {
@@ -1185,19 +1099,6 @@
     <!-- HERO SECTION -->
     <section class="hero-bg relative overflow-hidden min-h-screen flex items-center">
       <!-- Full-section galaxy layers -->
-      <div class="hero-framer-wrap" id="hero-framer-wrap" aria-hidden="true">
-        <div class="hero-framer-ring"></div>
-        <div class="hero-framer-ring"></div>
-        <div class="hero-framer-ring"></div>
-        <div class="hero-framer-dot"></div>
-        <div class="hero-framer-dot"></div>
-        <div class="hero-framer-dot"></div>
-        <div class="hero-framer-dot"></div>
-        <div class="hero-framer-dot"></div>
-        <div class="hero-framer-line"></div>
-        <div class="hero-framer-line"></div>
-        <div class="hero-framer-line"></div>
-      </div>
       <canvas id="hero-particle-canvas" aria-hidden="true"></canvas>
       <div id="comet-trail" aria-hidden="true"></div>
       <div class="ambient-glow" style="top:-80px;left:-60px;"></div>
@@ -1205,18 +1106,24 @@
 
       <!-- Floating decorative elements -->
       <div class="hidden md:block absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div class="float-slow absolute top-20 right-[10%] w-16 h-16 border border-primary/15 rounded-full" style="animation-delay:-1s;"></div>
-        <div class="float-med absolute top-32 right-[18%] w-8 h-8 border border-primary/20 rounded-full" style="animation-delay:-2.5s;"></div>
-        <div class="float-fast absolute bottom-32 right-[8%] w-3 h-3 bg-primary/30 rounded-full" style="animation-delay:-0.5s;"></div>
-        <div class="float-slow absolute bottom-40 right-[14%] w-2 h-2 bg-primary/20 rounded-full" style="animation-delay:-3s;"></div>
-        <div class="float-med absolute top-[40%] left-[3%] w-5 h-5 border border-primary/10 rounded-sm rotate-45" style="animation-delay:-1.5s;"></div>
-        <div class="float-fast absolute bottom-48 left-[6%] w-3 h-3 bg-primary/10 rounded-sm rotate-12" style="animation-delay:-4s;"></div>
+        <div class="float-slow absolute top-20 right-[10%] w-16 h-16 border border-primary/15 rounded-full"
+          style="animation-delay:-1s;"></div>
+        <div class="float-med absolute top-32 right-[18%] w-8 h-8 border border-primary/20 rounded-full"
+          style="animation-delay:-2.5s;"></div>
+        <div class="float-fast absolute bottom-32 right-[8%] w-3 h-3 bg-primary/30 rounded-full" style="animation-delay:-0.5s;">
+        </div>
+        <div class="float-slow absolute bottom-40 right-[14%] w-2 h-2 bg-primary/20 rounded-full" style="animation-delay:-3s;">
+        </div>
+        <div class="float-med absolute top-[40%] left-[3%] w-5 h-5 border border-primary/10 rounded-sm rotate-45"
+          style="animation-delay:-1.5s;"></div>
+        <div class="float-fast absolute bottom-48 left-[6%] w-3 h-3 bg-primary/10 rounded-sm rotate-12"
+          style="animation-delay:-4s;"></div>
       </div>
 
       <div class="max-w-6xl mx-auto px-4 sm:px-6 relative py-16 sm:py-24">
         <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
-            <h1 class="hero-title font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+            <h1 class="hero-title font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl mb-6">
               Xây dựng ứng dụng với <span class="gradient-text">Claude Code</span>
             </h1>
             <p class="hero-desc text-gray-400 text-base sm:text-lg mb-8 leading-relaxed">
@@ -1266,8 +1173,7 @@
                   <div class="carousel-overlay" aria-hidden="true"></div>
                 </div>
                 <div class="carousel-dots" role="tablist" aria-label="Chuyển slide">
-                  <button class="carousel-dot active" role="tab" aria-selected="true" aria-label="Slide 1"
-                    data-slide="0">
+                  <button class="carousel-dot active" role="tab" aria-selected="true" aria-label="Slide 1" data-slide="0">
                     <span class="dot-progress-wrap" aria-hidden="true"><span class="dot-progress-fill"></span></span>
                   </button>
                   <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Slide 2" data-slide="1">
@@ -2192,63 +2098,15 @@
     }, { passive: true });
 
     // ─── Hero Framer Motion Background ───
-    (function initHeroFramer() {
-      const wrap = document.getElementById('hero-framer-wrap');
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (!wrap || prefersReduced || !window.Motion) return;
-
-      const rings = wrap.querySelectorAll('.hero-framer-ring');
-      const dots = wrap.querySelectorAll('.hero-framer-dot');
-      const lines = wrap.querySelectorAll('.hero-framer-line');
-
-      rings.forEach((ring, i) => {
-        const duration = 20 + i * 8;
-        const direction = i % 2 === 0 ? 1 : -1;
-        Motion.animate(ring, {
-          rotate: [0, direction * 360],
-        }, {
-          duration,
-          repeat: Infinity,
-          easing: 'linear',
-        });
-      });
-
-      dots.forEach((dot, i) => {
-        const delay = i * 0.6;
-        Motion.animate(dot, {
-          opacity: [0.3, 0.9, 0.3],
-          scale: [1, 1.5, 1],
-        }, {
-          duration: 3,
-          delay,
-          repeat: Infinity,
-          easing: 'easeInOut',
-        });
-      });
-
-      lines.forEach((line, i) => {
-        const delay = i * 2;
-        Motion.animate(line, {
-          opacity: [0, 1, 0],
-          x: [-30, 30],
-        }, {
-          duration: 8,
-          delay,
-          repeat: Infinity,
-          easing: 'easeInOut',
-        });
-      });
-
-      // ─── Comet Trail ───
-      if (!finePointer) return;
+    (function initCometTrail() {
       const trail = document.getElementById('comet-trail');
       if (!trail) return;
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!finePointer) return;
 
       const particles = [];
       const MAX_PARTICLES = 32;
       let lastX = -1000, lastY = -1000;
-      let mouseX = -1000, mouseY = -1000;
       let rafId = null;
 
       function spawnParticle(x, y, vx, vy) {
@@ -2315,8 +2173,6 @@
           }
         }
 
-        mouseX = e.clientX;
-        mouseY = e.clientY;
         lastX = e.clientX;
         lastY = e.clientY;
       }, { passive: true });
@@ -2350,15 +2206,21 @@
 
       // Planets
       const planets = [];
-      const PLANET_COUNT = 5;
+      const PLANET_COUNT = 6;
+
+      // Shooting stars
+      const shootingStars = [];
+      const SHOOT_INTERVAL = 8000; // ms between shooting stars
+      let lastShootTime = 0;
 
       function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = width;
         canvas.height = height;
-        cx = width * 0.58;
-        cy = height * 0.42;
+        // Sun center-top (1/3 height)
+        cx = width * 0.5;
+        cy = height * 0.33;
         initStars();
         initOrbiters();
         initPlanets();
@@ -2403,38 +2265,98 @@
 
       function initPlanets() {
         planets.length = 0;
+        const baseSize = Math.min(width, height);
+
+        // Tỷ lệ quỹ đạo scale theo màn hình
         const planetData = [
-          { distRatio: 0.15, size: 5, color: '#F4A261', speed: 0.0012, glow: '#F4A261', ring: false },
-          { distRatio: 0.22, size: 3.5, color: '#DF6B33', speed: 0.0008, glow: '#DF6B33', ring: false },
-          { distRatio: 0.3, size: 4.5, color: '#E76F51', speed: 0.001, glow: '#E76F51', ring: true },
-          { distRatio: 0.18, size: 2.5, color: '#FFD4A8', speed: 0.0015, glow: '#FFD4A8', ring: false },
-          { distRatio: 0.26, size: 6, color: '#C05825', speed: 0.0006, glow: '#DF6B33', ring: true },
+          // Thuỷ (Mercury) - gần Mặt Trời nhất
+          {
+            name: 'Mercury', dist: baseSize * 0.12, size: 3,
+            color: '#B5B5B5', accent: '#8C8C8C', speed: 0.003,
+            glow: '#D4D4D4', ring: false, tilt: 0.2,
+            surface: 'crater',
+            orbitAngle: Math.PI * 0.6, // start position
+          },
+          // Kim (Venus) - lớn hơn, vàng trắng, mật độ khí
+          {
+            name: 'Venus', dist: baseSize * 0.18, size: 5.5,
+            color: '#E8CDA0', accent: '#D4A855', speed: 0.0018,
+            glow: '#FFD4A8', ring: false, tilt: 0.1,
+            surface: 'swirl',
+            orbitAngle: Math.PI * 1.2,
+          },
+          // Trái Đất - xanh với lục địa
+          {
+            name: 'Earth', dist: baseSize * 0.25, size: 5.8,
+            color: '#4A90D9', accent: '#2E8B57', speed: 0.0012,
+            glow: '#87CEEB', ring: false, tilt: 0.4,
+            surface: 'continent',
+            orbitAngle: Math.PI * 1.9,
+          },
+          // Hỏa (Mars) - đỏ gạch, nhỏ hơn
+          {
+            name: 'Mars', dist: baseSize * 0.31, size: 4,
+            color: '#C1440E', accent: '#8B3A0E', speed: 0.0009,
+            glow: '#E76F51', ring: false, tilt: 0.3,
+            surface: 'rust',
+            orbitAngle: Math.PI * 2.5,
+          },
+          // Mộc (Jupiter) - lớn nhất, có dải khí
+          {
+            name: 'Jupiter', dist: baseSize * 0.38, size: 9,
+            color: '#C88B3A', accent: '#A05C2C', speed: 0.0005,
+            glow: '#DEB887', ring: false, tilt: 0.15,
+            surface: 'stripe',
+            orbitAngle: Math.PI * 0.3,
+          },
+          // Thổ (Saturn) - có vành đai
+          {
+            name: 'Saturn', dist: baseSize * 0.46, size: 7.5,
+            color: '#E8D5A3', accent: '#C9A86C', speed: 0.00035,
+            glow: '#F4E4BC', ring: true, tilt: 0.5,
+            surface: 'band',
+            orbitAngle: Math.PI * 3.4,
+          },
+          // Diêm Vương (Pluto) - xa nhất, nhỏ, băng giá
+          {
+            name: 'Pluto', dist: baseSize * 0.52, size: 2.2,
+            color: '#B0A090', accent: '#D4C4B0', speed: 0.00022,
+            glow: '#C0B0A0', ring: false, tilt: 1.2,
+            surface: 'ice',
+            orbitAngle: Math.PI * 1.8,
+          },
         ];
+
         planetData.forEach(d => {
           planets.push({
-            angle: Math.random() * Math.PI * 2,
-            distance: Math.min(width, height) * d.distRatio,
+            name: d.name,
+            angle: d.orbitAngle,
+            distance: d.dist,
             size: d.size,
             color: d.color,
+            accent: d.accent,
             speed: d.speed,
             glow: d.glow,
             hasRing: d.ring,
-            ringAngle: Math.random() * Math.PI * 2,
+            ringAngle: d.orbitAngle,
             pulse: Math.random() * Math.PI * 2,
+            surface: d.surface,
+            tilt: d.tilt,
+            orbitPulse: Math.random() * Math.PI * 2,
           });
         });
       }
 
       function drawGalaxyCore() {
-        // Outer glow layers
-        const layers = [
-          { radius: 80, alpha: 0.03, color: '#DF6B33' },
-          { radius: 55, alpha: 0.06, color: '#E76F51' },
-          { radius: 35, alpha: 0.12, color: '#F4A261' },
-          { radius: 18, alpha: 0.25, color: '#FFD4A8' },
-          { radius: 8, alpha: 0.6, color: '#ffffff' },
+        // Solar corona - multiple glow layers
+        const coronaLayers = [
+          { radius: 200, alpha: 0.015, color: '#FFD700' },
+          { radius: 140, alpha: 0.025, color: '#FFA500' },
+          { radius: 90, alpha: 0.05, color: '#FF8C00' },
+          { radius: 55, alpha: 0.12, color: '#FF6600' },
+          { radius: 35, alpha: 0.25, color: '#FF4500' },
         ];
-        layers.forEach(l => {
+        coronaLayers.forEach(l => {
           const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, l.radius);
           grd.addColorStop(0, l.color + Math.round(l.alpha * 255).toString(16).padStart(2, '0'));
           grd.addColorStop(1, 'transparent');
@@ -2443,25 +2365,51 @@
           ctx.fillStyle = grd;
           ctx.fill();
         });
+
+        // Solar flares (rays)
+        const flareCount = 12;
+        const baseRadius = 18;
+        for (let i = 0; i < flareCount; i++) {
+          const angle = (i / flareCount) * Math.PI * 2;
+          const len = baseRadius + 8 + Math.sin(performance.now() * 0.001 + i) * 6;
+          const x2 = cx + Math.cos(angle) * len;
+          const y2 = cy + Math.sin(angle) * len;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(x2, y2);
+          ctx.strokeStyle = 'rgba(255, 220, 100, 0.35)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Inner bright core
+        const innerGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, baseRadius);
+        innerGrd.addColorStop(0, '#FFFFFF');
+        innerGrd.addColorStop(0.3, '#FFF8DC');
+        innerGrd.addColorStop(0.7, '#FFD700');
+        innerGrd.addColorStop(1, '#FF8C00');
+        ctx.beginPath();
+        ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2);
+        ctx.fillStyle = innerGrd;
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = '#FFD700';
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
       function drawSpiralArms() {
-        // Draw faint spiral arm paths
-        for (let arm = 0; arm < 3; arm++) {
-          const baseAngle = (arm / 3) * Math.PI * 2;
+        // Orbital paths - subtle dashed circles
+        planets.forEach(p => {
           ctx.beginPath();
-          for (let t = 0; t < 180; t++) {
-            const dist = 15 + t * 1.8;
-            const angle = baseAngle + t * 0.12;
-            const x = cx + Math.cos(angle) * dist;
-            const y = cy + Math.sin(angle) * dist;
-            if (t === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-          }
-          ctx.strokeStyle = `rgba(223, 107, 51, 0.04)`;
-          ctx.lineWidth = 30;
+          ctx.arc(cx, cy, p.distance, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+          ctx.lineWidth = 1;
+          ctx.setLineDash([4, 8]);
           ctx.stroke();
-        }
+          ctx.setLineDash([]);
+        });
       }
 
       function drawOrbiters(time) {
@@ -2489,47 +2437,166 @@
         planets.forEach(p => {
           p.angle += p.speed;
           p.pulse += 0.015;
+          p.orbitPulse += 0.008;
           p.x = cx + Math.cos(p.angle) * p.distance;
           p.y = cy + Math.sin(p.angle) * p.distance;
-          const pulseScale = 1 + 0.12 * Math.sin(p.pulse);
+          const pulseScale = 1 + 0.1 * Math.sin(p.pulse);
           const size = p.size * pulseScale;
 
           ctx.save();
-          // Glow
-          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3);
-          grd.addColorStop(0, p.glow + '40');
-          grd.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = grd;
-          ctx.globalAlpha = 0.5 + 0.3 * Math.sin(p.pulse);
-          ctx.fill();
-          ctx.globalAlpha = 1;
 
-          // Ring
+          // ─── Saturn ring (behind planet first) ───
           if (p.hasRing) {
-            p.ringAngle += 0.003;
+            p.ringAngle += 0.002;
             ctx.save();
             ctx.translate(p.x, p.y);
             ctx.rotate(p.ringAngle);
+
+            // Outer ring
             ctx.beginPath();
-            ctx.ellipse(0, 0, size * 2.5, size * 0.6, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = p.color + '60';
+            ctx.ellipse(0, 0, size * 2.8, size * 0.55, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = '#C9A86C88';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Inner ring
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size * 2.2, size * 0.42, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = '#E8D5A3aa';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Ring gap
+            ctx.beginPath();
+            ctx.ellipse(0, 0, size * 1.9, size * 0.36, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(9,10,20,0.5)';
             ctx.lineWidth = 1.5;
             ctx.stroke();
+
             ctx.restore();
           }
 
-          // Planet body
-          ctx.shadowBlur = 15;
+          // ─── Glow aura ───
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3.5);
+          grd.addColorStop(0, p.glow + '50');
+          grd.addColorStop(0.5, p.glow + '20');
+          grd.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.globalAlpha = 0.4 + 0.2 * Math.sin(p.pulse);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          // ─── Planet surface (per type) ───
+          ctx.shadowBlur = 12;
           ctx.shadowColor = p.glow;
+
           ctx.beginPath();
           ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-          const planetGrd = ctx.createRadialGradient(p.x - size * 0.3, p.y - size * 0.3, 0, p.x, p.y, size);
-          planetGrd.addColorStop(0, '#FFD4A8');
-          planetGrd.addColorStop(0.5, p.color);
-          planetGrd.addColorStop(1, '#8B3A1A');
-          ctx.fillStyle = planetGrd;
+
+          if (p.name === 'Mercury') {
+            // Gray rocky with craters
+            const mGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            mGrd.addColorStop(0, '#E0E0E0');
+            mGrd.addColorStop(0.5, '#9E9E9E');
+            mGrd.addColorStop(1, '#4A4A4A');
+            ctx.fillStyle = mGrd;
+          } else if (p.name === 'Venus') {
+            // Thick yellow-orange atmosphere swirl
+            const vGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            vGrd.addColorStop(0, '#FFF8E1');
+            vGrd.addColorStop(0.4, '#FFE0B2');
+            vGrd.addColorStop(0.8, '#E8C89A');
+            vGrd.addColorStop(1, '#A0784A');
+            ctx.fillStyle = vGrd;
+          } else if (p.name === 'Earth') {
+            // Blue with green continents
+            const eGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            eGrd.addColorStop(0, '#B3E5FC');
+            eGrd.addColorStop(0.35, '#4FC3F7');
+            eGrd.addColorStop(0.65, '#1565C0');
+            eGrd.addColorStop(1, '#0D47A1');
+            ctx.fillStyle = eGrd;
+            ctx.fill();
+            ctx.save();
+            ctx.clip();
+            // Continents
+            const cAngle = p.angle * 0.5;
+            ctx.beginPath();
+            ctx.arc(p.x + Math.cos(cAngle) * size * 0.3, p.y + Math.sin(cAngle * 0.8) * size * 0.3, size * 0.35, 0, Math.PI * 2);
+            ctx.fillStyle = '#2E8B57';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(p.x + Math.cos(cAngle + 2.1) * size * 0.4, p.y + Math.sin(cAngle * 0.6 + 1) * size * 0.25, size * 0.22, 0, Math.PI * 2);
+            ctx.fillStyle = '#388E3C';
+            ctx.fill();
+            ctx.restore();
+          } else if (p.name === 'Mars') {
+            // Red rust with polar caps
+            const mGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            mGrd.addColorStop(0, '#FF8A65');
+            mGrd.addColorStop(0.5, '#C62828');
+            mGrd.addColorStop(1, '#6D1A1A');
+            ctx.fillStyle = mGrd;
+          } else if (p.name === 'Jupiter') {
+            // Brown with orange stripes
+            const jGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            jGrd.addColorStop(0, '#FFCC80');
+            jGrd.addColorStop(0.3, '#C88B3A');
+            jGrd.addColorStop(0.55, '#A05C2C');
+            jGrd.addColorStop(0.75, '#D4A055');
+            jGrd.addColorStop(1, '#8B4513');
+            ctx.fillStyle = jGrd;
+            ctx.fill();
+            ctx.save();
+            ctx.clip();
+            // Jupiter bands
+            const bandOffset = Math.sin(p.orbitPulse) * 2;
+            const bands = [
+              { y: -0.7, h: 0.18, color: '#D4956A' },
+              { y: -0.3, h: 0.12, color: '#F5DEB3' },
+              { y: 0.1, h: 0.2, color: '#C88B3A' },
+              { y: 0.45, h: 0.15, color: '#DEB887' },
+            ];
+            bands.forEach(b => {
+              ctx.beginPath();
+              ctx.ellipse(p.x, p.y + (b.y + b.h / 2 + bandOffset * 0.05) * size, size * 0.95, b.h * size * 0.5, 0, 0, Math.PI * 2);
+              ctx.fillStyle = b.color;
+              ctx.globalAlpha = 0.6;
+              ctx.fill();
+            });
+            // Great Red Spot
+            ctx.beginPath();
+            ctx.ellipse(p.x + size * 0.25, p.y + size * 0.15, size * 0.18, size * 0.1, 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = '#C0392B';
+            ctx.globalAlpha = 0.7;
+            ctx.fill();
+            ctx.restore();
+          } else if (p.name === 'Saturn') {
+            // Yellow-beige with bands
+            const sGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            sGrd.addColorStop(0, '#FFF8DC');
+            sGrd.addColorStop(0.4, '#E8D5A3');
+            sGrd.addColorStop(0.8, '#C9A86C');
+            sGrd.addColorStop(1, '#8B7355');
+            ctx.fillStyle = sGrd;
+          } else if (p.name === 'Pluto') {
+            // Ice dwarf - pale blue-gray
+            const plGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            plGrd.addColorStop(0, '#E8E0D8');
+            plGrd.addColorStop(0.5, '#B0A090');
+            plGrd.addColorStop(1, '#6B5B4F');
+            ctx.fillStyle = plGrd;
+          } else {
+            // Default
+            const dGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
+            dGrd.addColorStop(0, '#FFD4A8');
+            dGrd.addColorStop(0.5, p.color);
+            dGrd.addColorStop(1, '#8B3A1A');
+            ctx.fillStyle = dGrd;
+          }
+
           ctx.fill();
           ctx.restore();
         });
@@ -2553,6 +2620,61 @@
         });
       }
 
+      function updateShootingStars(time) {
+        if (time - lastShootTime > SHOOT_INTERVAL + Math.random() * 5000) {
+          // Spawn shooting star
+          const startX = width * (0.4 + Math.random() * 0.5);
+          const startY = height * (0.1 + Math.random() * 0.3);
+          shootingStars.push({
+            x: startX,
+            y: startY,
+            vx: -(30 + Math.random() * 40),
+            vy: (15 + Math.random() * 20),
+            life: 1.0,
+            decay: 0.015 + Math.random() * 0.01,
+            width: 40 + Math.random() * 60,
+          });
+          lastShootTime = time;
+        }
+
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const s = shootingStars[i];
+          s.x += s.vx;
+          s.y += s.vy;
+          s.life -= s.decay;
+
+          if (s.life <= 0 || s.x < -50 || s.y > height + 50) {
+            shootingStars.splice(i, 1);
+          } else {
+            const angle = Math.atan2(s.vy, s.vx);
+            ctx.save();
+            ctx.globalAlpha = s.life * 0.8;
+            const grd = ctx.createLinearGradient(
+              s.x, s.y,
+              s.x + Math.cos(angle) * s.width, s.y + Math.sin(angle) * s.width
+            );
+            grd.addColorStop(0, 'transparent');
+            grd.addColorStop(0.3, '#FFD70088');
+            grd.addColorStop(0.7, '#FFD700');
+            grd.addColorStop(1, '#FFFFFF');
+            ctx.beginPath();
+            ctx.moveTo(s.x, s.y);
+            ctx.lineTo(s.x + Math.cos(angle) * s.width, s.y + Math.sin(angle) * s.width);
+            ctx.strokeStyle = grd;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Head glow
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = '#FFD700';
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+      }
+
       function draw() {
         ctx.clearRect(0, 0, width, height);
         const time = performance.now();
@@ -2561,6 +2683,7 @@
         drawSpiralArms();
         drawOrbiters(time);
         drawPlanets();
+        updateShootingStars(time);
         drawStars(time);
 
         rafId = requestAnimationFrame(draw);
