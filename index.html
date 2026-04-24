@@ -583,9 +583,9 @@
     .hero-bg {
       position: relative;
       background:
-        radial-gradient(120% 100% at 0% 0%, rgba(223, 107, 51, 0.16) 0%, rgba(223, 107, 51, 0) 48%),
-        radial-gradient(95% 90% at 100% 10%, rgba(244, 162, 97, 0.14) 0%, rgba(244, 162, 97, 0) 52%),
-        linear-gradient(135deg, #0b0c18 0%, #101321 45%, #0b0c18 100%);
+        radial-gradient(120% 100% at 0% 0%, rgba(223, 107, 51, 0.08) 0%, rgba(223, 107, 51, 0) 48%),
+        radial-gradient(95% 90% at 100% 10%, rgba(244, 162, 97, 0.07) 0%, rgba(244, 162, 97, 0) 52%),
+        linear-gradient(135deg, #06070f 0%, #08091a 45%, #06070f 100%);
       background-size: 100% 100%;
       background-repeat: no-repeat;
     }
@@ -2210,8 +2210,21 @@
 
       // Shooting stars
       const shootingStars = [];
-      const SHOOT_INTERVAL = 8000; // ms between shooting stars
+      const SHOOT_INTERVAL = 8000;
       let lastShootTime = 0;
+
+      // Galaxy tilt angle (radians) - creates depth perception
+      const GALAXY_TILT = 0.55;
+      const GALAXY_SCALE_Y = 0.65; // vertical compression for ellipse look
+
+      // Project a point with galaxy tilt
+      function projectPoint(x, y) {
+        const tx = x - cx;
+        const ty = (y - cy) * GALAXY_SCALE_Y;
+        const rx = tx * Math.cos(GALAXY_TILT) - ty * Math.sin(GALAXY_TILT);
+        const ry = tx * Math.sin(GALAXY_TILT) + ty * Math.cos(GALAXY_TILT);
+        return { x: cx + rx, y: cy + ry };
+      }
 
       function resize() {
         width = window.innerWidth;
@@ -2271,56 +2284,56 @@
         const planetData = [
           // Thuỷ (Mercury) - gần Mặt Trời nhất
           {
-            name: 'Mercury', dist: baseSize * 0.12, size: 5,
-            color: '#B5B5B5', accent: '#8C8C8C', speed: 0.003,
+            name: 'Mercury', dist: baseSize * 0.15, size: 5,
+            color: '#B5B5B5', accent: '#8C8C8C', speed: 0.00432,
             glow: '#D4D4D4', ring: false, tilt: 0.2,
             surface: 'crater',
             orbitAngle: Math.PI * 0.6,
           },
           // Kim (Venus) - lớn hơn, vàng trắng, mật độ khí
           {
-            name: 'Venus', dist: baseSize * 0.18, size: 9,
-            color: '#E8CDA0', accent: '#D4A855', speed: 0.0018,
+            name: 'Venus', dist: baseSize * 0.22, size: 9,
+            color: '#E8CDA0', accent: '#D4A855', speed: 0.002592,
             glow: '#FFD4A8', ring: false, tilt: 0.1,
             surface: 'swirl',
             orbitAngle: Math.PI * 1.2,
           },
           // Trái Đất - xanh với lục địa
           {
-            name: 'Earth', dist: baseSize * 0.25, size: 9.5,
-            color: '#4A90D9', accent: '#2E8B57', speed: 0.0012,
+            name: 'Earth', dist: baseSize * 0.31, size: 9.5,
+            color: '#4A90D9', accent: '#2E8B57', speed: 0.001728,
             glow: '#87CEEB', ring: false, tilt: 0.4,
             surface: 'continent',
             orbitAngle: Math.PI * 1.9,
           },
           // Hỏa (Mars) - đỏ gạch, nhỏ hơn
           {
-            name: 'Mars', dist: baseSize * 0.31, size: 6.5,
-            color: '#C1440E', accent: '#8B3A0E', speed: 0.0009,
+            name: 'Mars', dist: baseSize * 0.39, size: 6.5,
+            color: '#C1440E', accent: '#8B3A0E', speed: 0.001296,
             glow: '#E76F51', ring: false, tilt: 0.3,
             surface: 'rust',
             orbitAngle: Math.PI * 2.5,
           },
           // Mộc (Jupiter) - lớn nhất, có dải khí
           {
-            name: 'Jupiter', dist: baseSize * 0.38, size: 14,
-            color: '#C88B3A', accent: '#A05C2C', speed: 0.0005,
+            name: 'Jupiter', dist: baseSize * 0.48, size: 14,
+            color: '#C88B3A', accent: '#A05C2C', speed: 0.00072,
             glow: '#DEB887', ring: false, tilt: 0.15,
             surface: 'stripe',
             orbitAngle: Math.PI * 0.3,
           },
           // Thổ (Saturn) - có vành đai
           {
-            name: 'Saturn', dist: baseSize * 0.46, size: 12,
-            color: '#E8D5A3', accent: '#C9A86C', speed: 0.00035,
+            name: 'Saturn', dist: baseSize * 0.58, size: 12,
+            color: '#E8D5A3', accent: '#C9A86C', speed: 0.000504,
             glow: '#F4E4BC', ring: true, tilt: 0.5,
             surface: 'band',
             orbitAngle: Math.PI * 3.4,
           },
           // Diêm Vương (Pluto) - xa nhất, nhỏ, băng giá
           {
-            name: 'Pluto', dist: baseSize * 0.52, size: 3.5,
-            color: '#B0A090', accent: '#D4C4B0', speed: 0.00022,
+            name: 'Pluto', dist: baseSize * 0.66, size: 3.5,
+            color: '#B0A090', accent: '#D4C4B0', speed: 0.0003168,
             glow: '#C0B0A0', ring: false, tilt: 1.2,
             surface: 'ice',
             orbitAngle: Math.PI * 1.8,
@@ -2426,10 +2439,10 @@
       }
 
       function drawSpiralArms() {
-        // Orbital paths - subtle dashed circles
+        // Tilted elliptical orbit paths
         planets.forEach(p => {
           ctx.beginPath();
-          ctx.arc(cx, cy, p.distance, 0, Math.PI * 2);
+          ctx.ellipse(cx, cy, p.distance, p.distance * GALAXY_SCALE_Y, GALAXY_TILT, 0, Math.PI * 2);
           ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
           ctx.lineWidth = 1;
           ctx.setLineDash([4, 8]);
@@ -2443,23 +2456,23 @@
           o.angle += o.angleSpeed;
           o.pulse += 0.01;
           const spiralAngle = o.angle + o.spiralOffset + o.distance * o.spiralTightness * 0.01;
-          o.x = cx + Math.cos(spiralAngle) * o.distance;
-          o.y = cy + Math.sin(spiralAngle) * o.distance;
+          const rawX = cx + Math.cos(spiralAngle) * o.distance;
+          const rawY = cy + Math.sin(spiralAngle) * o.distance;
+          const proj = projectPoint(rawX, rawY);
           const pulseAlpha = o.opacity * (0.5 + 0.5 * Math.sin(o.pulse));
 
           ctx.save();
           ctx.shadowBlur = o.size > 1.5 ? 6 : 3;
           ctx.shadowColor = o.color;
           ctx.beginPath();
-          ctx.arc(o.x, o.y, o.size, 0, Math.PI * 2);
+          ctx.arc(proj.x, proj.y, o.size, 0, Math.PI * 2);
           ctx.fillStyle = o.color;
           ctx.globalAlpha = pulseAlpha;
           ctx.fill();
-          // Crisp point
           ctx.globalAlpha = 1;
           ctx.fillStyle = '#ffffff';
           ctx.beginPath();
-          ctx.arc(o.x, o.y, o.size * 0.4, 0, Math.PI * 2);
+          ctx.arc(proj.x, proj.y, o.size * 0.4, 0, Math.PI * 2);
           ctx.globalAlpha = pulseAlpha * 0.5;
           ctx.fill();
           ctx.restore();
@@ -2471,8 +2484,11 @@
           p.angle += p.speed;
           p.pulse += 0.015;
           p.orbitPulse += 0.008;
-          p.x = cx + Math.cos(p.angle) * p.distance;
-          p.y = cy + Math.sin(p.angle) * p.distance;
+          const rawX = cx + Math.cos(p.angle) * p.distance;
+          const rawY = cy + Math.sin(p.angle) * p.distance;
+          const proj = projectPoint(rawX, rawY);
+          p.x = proj.x;
+          p.y = proj.y;
           const pulseScale = 1 + 0.1 * Math.sin(p.pulse);
           const size = p.size * pulseScale;
 
