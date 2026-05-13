@@ -14,6 +14,7 @@
     rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="https://unpkg.com/motion@10.18.0/dist/motion.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/dist/pixi.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -1387,9 +1388,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 1: Làm quen Claude Code</div>
               <div class="text-gray-400 text-xs mt-0.5">Cài đặt, cấu hình & luồng làm việc cơ bản</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">0,5 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">0,5
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Tìm hiểu cách cài đặt Claude Code, cấu hình môi trường, và nắm được luồng làm việc cơ bản để bắt đầu xây dựng ứng dụng.</div>
+          <div class="text-gray-300 text-xs pl-11">Tìm hiểu cách cài đặt Claude Code, cấu hình môi trường, và nắm được luồng làm
+            việc cơ bản để bắt đầu xây dựng ứng dụng.</div>
         </div>
         <!-- Session 2 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1401,9 +1404,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 2: Prompt Engineering thực chiến</div>
               <div class="text-gray-400 text-xs mt-0.5">Viết prompt hiệu quả để điều khiển AI</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">0,5 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">0,5
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Học cách viết prompt rõ ràng, có cấu trúc để Claude Code hiểu đúng yêu cầu và trả ra code chất lượng cao.</div>
+          <div class="text-gray-300 text-xs pl-11">Học cách viết prompt rõ ràng, có cấu trúc để Claude Code hiểu đúng yêu cầu và
+            trả ra code chất lượng cao.</div>
         </div>
         <!-- Session 3 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1415,9 +1420,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 3: Thiết kế kiến trúc ứng dụng cùng AI</div>
               <div class="text-gray-400 text-xs mt-0.5">Lên kế hoạch, chọn công nghệ, vẽ sơ đồ</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Sử dụng AI để thiết kế kiến trúc ứng dụng, lựa chọn công nghệ phù hợp, và vẽ sơ đồ hệ thống trước khi bắt đầu code.</div>
+          <div class="text-gray-300 text-xs pl-11">Sử dụng AI để thiết kế kiến trúc ứng dụng, lựa chọn công nghệ phù hợp, và vẽ
+            sơ đồ hệ thống trước khi bắt đầu code.</div>
         </div>
         <!-- Session 4 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1429,9 +1436,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 4: Xây dựng Backend với Firebase</div>
               <div class="text-gray-400 text-xs mt-0.5">Firestore, Auth, Functions, Security Rules</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Xây dựng Backend hoàn chỉnh với Firebase: Firestore database, Authentication, Cloud Functions và Security Rules.</div>
+          <div class="text-gray-300 text-xs pl-11">Xây dựng Backend hoàn chỉnh với Firebase: Firestore database, Authentication,
+            Cloud Functions và Security Rules.</div>
         </div>
         <!-- Session 5 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1443,9 +1452,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 5: Xây dựng Frontend</div>
               <div class="text-gray-400 text-xs mt-0.5">UI, kết nối Firebase, xử lý nghiệp vụ</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">4
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Xây dựng giao diện người dùng, kết nối với Firebase Backend, và implement các logic nghiệp vụ hoàn chỉnh.</div>
+          <div class="text-gray-300 text-xs pl-11">Xây dựng giao diện người dùng, kết nối với Firebase Backend, và implement các
+            logic nghiệp vụ hoàn chỉnh.</div>
         </div>
         <!-- Session 6 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1457,9 +1468,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 6: Debug & Refactor cùng AI</div>
               <div class="text-gray-400 text-xs mt-0.5">Tìm và sửa lỗi, tối ưu code với Claude Code</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Sử dụng Claude Code để debug nhanh, phân tích lỗi, và refactor code để cải thiện performance và maintainability.</div>
+          <div class="text-gray-300 text-xs pl-11">Sử dụng Claude Code để debug nhanh, phân tích lỗi, và refactor code để cải
+            thiện performance và maintainability.</div>
         </div>
         <!-- Session 7 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1471,9 +1484,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 7: Tích hợp tính năng nâng cao</div>
               <div class="text-gray-400 text-xs mt-0.5">Notifications, analytics, monitoring</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Tích hợp các tính năng nâng cao như push notifications, analytics, và monitoring để hoàn thiện ứng dụng.</div>
+          <div class="text-gray-300 text-xs pl-11">Tích hợp các tính năng nâng cao như push notifications, analytics, và
+            monitoring để hoàn thiện ứng dụng.</div>
         </div>
         <!-- Session 8 -->
         <div class="card-hover bg-[#0d0d1a] rounded-xl p-4">
@@ -1485,9 +1500,11 @@
               <div class="font-heading font-semibold text-white text-sm">Buổi 8: Deploy & Hoàn thiện sản phẩm</div>
               <div class="text-gray-400 text-xs mt-0.5">Deploy lên Vercel, final review</div>
             </div>
-            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1 tiết</span>
+            <span class="text-xs text-orange-200 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded shrink-0">1
+              tiết</span>
           </div>
-          <div class="text-gray-300 text-xs pl-11">Deploy ứng dụng lên Vercel, tối ưu production build, final review và demo sản phẩm hoàn chỉnh.</div>
+          <div class="text-gray-300 text-xs pl-11">Deploy ứng dụng lên Vercel, tối ưu production build, final review và demo sản
+            phẩm hoàn chỉnh.</div>
         </div>
       </div>
     </section>
@@ -2148,39 +2165,56 @@
       animateTrail();
     })();
 
-    // ─── Hero Galaxy Particle Canvas ───
-    (function initHeroParticles() {
+    // ─── Hero Galaxy Particle Canvas (PIXIJS) ───
+    (async function initHeroParticles() {
       const canvas = document.getElementById('hero-particle-canvas');
       if (!canvas) return;
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
 
-      const ctx = canvas.getContext('2d');
-      let width = 0, height = 0, cx = 0, cy = 0;
-      let rafId = null;
+      const { Application, Graphics } = PIXI;
 
-      // Stars (background)
+      const app = new Application({
+        view: canvas,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        backgroundAlpha: 0,
+        antialias: true,
+        autoDensity: true,
+        resolution: Math.min(window.devicePixelRatio || 1, 2),
+      });
+
       const stars = [];
       const STAR_COUNT = 120;
-
-      // Orbiting particles (galaxy arms)
       const orbiters = [];
       const ORBITER_COUNT = 80;
-
-      // Planets
       const planets = [];
-      const PLANET_COUNT = 6;
-
-      // Shooting stars
       const shootingStars = [];
       const SHOOT_INTERVAL = 8000;
       let lastShootTime = 0;
 
-      // Galaxy tilt angle (radians) - creates depth perception
       const GALAXY_TILT = 0.55;
-      const GALAXY_SCALE_Y = 0.65; // vertical compression for ellipse look
+      const GALAXY_SCALE_Y = 0.65;
 
-      // Project a point with galaxy tilt
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let cx = width * 0.5;
+      let cy = height * 0.33;
+
+      const starsGfx = new Graphics();
+      const orbitersGfx = new Graphics();
+      const sunGfx = new Graphics();
+      const planetsGfx = new Graphics();
+      const armsGfx = new Graphics();
+      const shootingGfx = new Graphics();
+
+      app.stage.addChild(starsGfx);
+      app.stage.addChild(armsGfx);
+      app.stage.addChild(orbitersGfx);
+      app.stage.addChild(sunGfx);
+      app.stage.addChild(planetsGfx);
+      app.stage.addChild(shootingGfx);
+
       function projectPoint(x, y) {
         const tx = x - cx;
         const ty = (y - cy) * GALAXY_SCALE_Y;
@@ -2192,9 +2226,7 @@
       function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-        // Sun center-top (1/3 height)
+        app.renderer.resize(width, height);
         cx = width * 0.5;
         cy = height * 0.33;
         initStars();
@@ -2204,6 +2236,7 @@
 
       function initStars() {
         stars.length = 0;
+        const colors = [0xDF6B33, 0xF4A261, 0xFFFFFF, 0xE8D5C4];
         for (let i = 0; i < STAR_COUNT; i++) {
           stars.push({
             x: Math.random() * width,
@@ -2212,15 +2245,16 @@
             opacity: Math.random() * 0.7 + 0.1,
             twinkle: Math.random() * Math.PI * 2,
             twinkleSpeed: 0.005 + Math.random() * 0.02,
-            color: ['#DF6B33', '#F4A261', '#ffffff', '#E8D5C4'][Math.floor(Math.random() * 4)],
+            color: colors[Math.floor(Math.random() * 4)],
           });
         }
       }
 
       function initOrbiters() {
         orbiters.length = 0;
+        const colors = [0xDF6B33, 0xF4A261, 0xE76F51, 0xFFD4A8];
         for (let i = 0; i < ORBITER_COUNT; i++) {
-          const arm = Math.floor(Math.random() * 3); // 0, 1, 2 arms
+          const arm = Math.floor(Math.random() * 3);
           const baseAngle = (arm / 3) * Math.PI * 2;
           const spiralOffset = arm === 0 ? 0 : arm === 1 ? Math.PI * 0.7 : Math.PI * 1.4;
           orbiters.push({
@@ -2232,7 +2266,7 @@
             angleSpeed: 0.0003 + Math.random() * 0.0006,
             size: Math.random() * 2 + 0.4,
             opacity: Math.random() * 0.5 + 0.1,
-            color: ['#DF6B33', '#F4A261', '#E76F51', '#FFD4A8'][Math.floor(Math.random() * 4)],
+            color: colors[Math.floor(Math.random() * 4)],
             spiralTightness: 0.15 + Math.random() * 0.1,
             pulse: Math.random() * Math.PI * 2,
           });
@@ -2242,82 +2276,21 @@
       function initPlanets() {
         planets.length = 0;
         const baseSize = Math.min(width, height);
-
-        // Tỷ lệ quỹ đạo scale theo màn hình
         const planetData = [
-          // Thuỷ (Mercury) - gần Mặt Trời nhất
-          {
-            name: 'Mercury', dist: baseSize * 0.15, size: 5,
-            color: '#B5B5B5', accent: '#8C8C8C', speed: 0.00432,
-            glow: '#D4D4D4', ring: false, tilt: 0.2,
-            surface: 'crater',
-            orbitAngle: Math.PI * 0.6,
-          },
-          // Kim (Venus) - lớn hơn, vàng trắng, mật độ khí
-          {
-            name: 'Venus', dist: baseSize * 0.22, size: 9,
-            color: '#E8CDA0', accent: '#D4A855', speed: 0.002592,
-            glow: '#FFD4A8', ring: false, tilt: 0.1,
-            surface: 'swirl',
-            orbitAngle: Math.PI * 1.2,
-          },
-          // Trái Đất - xanh với lục địa
-          {
-            name: 'Earth', dist: baseSize * 0.31, size: 9.5,
-            color: '#4A90D9', accent: '#2E8B57', speed: 0.001728,
-            glow: '#87CEEB', ring: false, tilt: 0.4,
-            surface: 'continent',
-            orbitAngle: Math.PI * 1.9,
-          },
-          // Hỏa (Mars) - đỏ gạch, nhỏ hơn
-          {
-            name: 'Mars', dist: baseSize * 0.39, size: 6.5,
-            color: '#C1440E', accent: '#8B3A0E', speed: 0.001296,
-            glow: '#E76F51', ring: false, tilt: 0.3,
-            surface: 'rust',
-            orbitAngle: Math.PI * 2.5,
-          },
-          // Mộc (Jupiter) - lớn nhất, có dải khí
-          {
-            name: 'Jupiter', dist: baseSize * 0.48, size: 14,
-            color: '#C88B3A', accent: '#A05C2C', speed: 0.00072,
-            glow: '#DEB887', ring: false, tilt: 0.15,
-            surface: 'stripe',
-            orbitAngle: Math.PI * 0.3,
-          },
-          // Thổ (Saturn) - có vành đai
-          {
-            name: 'Saturn', dist: baseSize * 0.58, size: 12,
-            color: '#E8D5A3', accent: '#C9A86C', speed: 0.000504,
-            glow: '#F4E4BC', ring: true, tilt: 0.5,
-            surface: 'band',
-            orbitAngle: Math.PI * 3.4,
-          },
-          // Diêm Vương (Pluto) - xa nhất, nhỏ, băng giá
-          {
-            name: 'Pluto', dist: baseSize * 0.66, size: 3.5,
-            color: '#B0A090', accent: '#D4C4B0', speed: 0.0003168,
-            glow: '#C0B0A0', ring: false, tilt: 1.2,
-            surface: 'ice',
-            orbitAngle: Math.PI * 1.8,
-          },
+          { name: 'Mercury', dist: baseSize * 0.15, size: 5, color: 0xB5B5B5, speed: 0.00432, glow: 0xD4D4D4, ring: false, surface: 'crater', orbitAngle: Math.PI * 0.6 },
+          { name: 'Venus', dist: baseSize * 0.22, size: 9, color: 0xE8CDA0, speed: 0.002592, glow: 0xFFD4A8, ring: false, surface: 'swirl', orbitAngle: Math.PI * 1.2 },
+          { name: 'Earth', dist: baseSize * 0.31, size: 9.5, color: 0x4A90D9, speed: 0.001728, glow: 0x87CEEB, ring: false, surface: 'continent', orbitAngle: Math.PI * 1.9 },
+          { name: 'Mars', dist: baseSize * 0.39, size: 6.5, color: 0xC1440E, speed: 0.001296, glow: 0xE76F51, ring: false, surface: 'rust', orbitAngle: Math.PI * 2.5 },
+          { name: 'Jupiter', dist: baseSize * 0.48, size: 14, color: 0xC88B3A, speed: 0.00072, glow: 0xDEB887, ring: false, surface: 'stripe', orbitAngle: Math.PI * 0.3 },
+          { name: 'Saturn', dist: baseSize * 0.58, size: 12, color: 0xE8D5A3, speed: 0.000504, glow: 0xF4E4BC, ring: true, surface: 'band', orbitAngle: Math.PI * 3.4 },
+          { name: 'Pluto', dist: baseSize * 0.66, size: 3.5, color: 0xB0A090, speed: 0.0003168, glow: 0xC0B0A0, ring: false, surface: 'ice', orbitAngle: Math.PI * 1.8 },
         ];
-
         planetData.forEach(d => {
           planets.push({
-            name: d.name,
-            angle: d.orbitAngle,
-            distance: d.dist,
-            size: d.size,
-            color: d.color,
-            accent: d.accent,
-            speed: d.speed,
-            glow: d.glow,
-            hasRing: d.ring,
-            ringAngle: d.orbitAngle,
-            pulse: Math.random() * Math.PI * 2,
-            surface: d.surface,
-            tilt: d.tilt,
+            name: d.name, angle: d.orbitAngle, distance: d.dist,
+            size: d.size, color: d.color, speed: d.speed,
+            glow: d.glow, hasRing: d.ring, ringAngle: d.orbitAngle,
+            pulse: Math.random() * Math.PI * 2, surface: d.surface,
             orbitPulse: Math.random() * Math.PI * 2,
           });
         });
@@ -2325,97 +2298,34 @@
 
       let sunShimmerTime = 0;
 
-      function drawSun() {
-        sunShimmerTime += 0.8;
-        const sunR = Math.min(width, height) * 0.034;
-
-        // Heat shimmer - irregular flame blobs around edge
-        ctx.save();
-        for (let i = 0; i < 20; i++) {
-          const angle = (i / 20) * Math.PI * 2;
-          const wobble = 1 + Math.sin(sunShimmerTime * 0.025 + i * 0.9) * 0.06
-                       + Math.sin(sunShimmerTime * 0.018 + i * 1.4) * 0.04;
-          const r = sunR * wobble;
-          const px = cx + Math.cos(angle) * r;
-          const py = cy + Math.sin(angle) * r;
-          ctx.beginPath();
-          ctx.arc(px, py, sunR * 0.15, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 120, 20, 0.05)';
-          ctx.fill();
+      function drawStars() {
+        const g = starsGfx;
+        g.clear();
+        for (const s of stars) {
+          s.twinkle += s.twinkleSpeed;
+          const alpha = s.opacity * (0.4 + 0.6 * Math.sin(s.twinkle));
+          g.beginFill(s.color, alpha);
+          g.drawCircle(s.x, s.y, s.size);
+          g.endFill();
+          g.beginFill(0xFFFFFF, alpha * 0.8);
+          g.drawCircle(s.x, s.y, s.size * 0.5);
+          g.endFill();
         }
-        // Second outer ring - wider, softer
-        for (let i = 0; i < 16; i++) {
-          const angle = (i / 16) * Math.PI * 2 + sunShimmerTime * 0.003;
-          const r = sunR * (1.1 + Math.sin(sunShimmerTime * 0.02 + i * 1.3) * 0.08);
-          const px = cx + Math.cos(angle) * r;
-          const py = cy + Math.sin(angle) * r;
-          ctx.beginPath();
-          ctx.arc(px, py, sunR * 0.25, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255, 90, 10, 0.05)';
-          ctx.fill();
-        }
-        ctx.restore();
-
-        // Soft corona glow - 3 layers only
-        const coronaLayers = [
-          { r: sunR * 2.5, alpha: 0.04, col: '#FFB347' },
-          { r: sunR * 1.6, alpha: 0.08, col: '#FF8C00' },
-          { r: sunR * 1.15, alpha: 0.15, col: '#FF6600' },
-        ];
-        coronaLayers.forEach(l => {
-          const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, l.r);
-          grd.addColorStop(0, l.col + Math.round(l.alpha * 255).toString(16).padStart(2, '0'));
-          grd.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.arc(cx, cy, l.r, 0, Math.PI * 2);
-          ctx.fillStyle = grd;
-          ctx.fill();
-        });
-
-        // Simple edge darkening (limb darkening)
-        const limbGrd = ctx.createRadialGradient(cx, cy, sunR * 0.8, cx, cy, sunR);
-        limbGrd.addColorStop(0, 'rgba(0,0,0,0)');
-        limbGrd.addColorStop(1, 'rgba(0,0,0,0.4)');
-
-        // Sun surface with gradient
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(cx, cy, sunR, 0, Math.PI * 2);
-        ctx.clip();
-
-        const surfGrd = ctx.createRadialGradient(
-          cx - sunR * 0.1, cy - sunR * 0.1, 0,
-          cx, cy, sunR
-        );
-        surfGrd.addColorStop(0,   '#FFF5E0');
-        surfGrd.addColorStop(0.4, '#FFCC66');
-        surfGrd.addColorStop(0.75,'#FF9933');
-        surfGrd.addColorStop(1,   '#E65700');
-        ctx.fillStyle = surfGrd;
-        ctx.fillRect(cx - sunR, cy - sunR, sunR * 2, sunR * 2);
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, sunR, 0, Math.PI * 2);
-        ctx.fillStyle = limbGrd;
-        ctx.fill();
-        ctx.restore();
       }
 
       function drawSpiralArms() {
-        // Tilted elliptical orbit paths
-        planets.forEach(p => {
-          ctx.beginPath();
-          ctx.ellipse(cx, cy, p.distance, p.distance * GALAXY_SCALE_Y, GALAXY_TILT, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
-          ctx.lineWidth = 1;
-          ctx.setLineDash([4, 8]);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        });
+        const g = armsGfx;
+        g.clear();
+        for (const p of planets) {
+          g.lineStyle(1, 0xFFFFFF, 0.04);
+          g.drawEllipse(cx, cy, p.distance, p.distance * GALAXY_SCALE_Y);
+        }
       }
 
-      function drawOrbiters(time) {
-        orbiters.forEach(o => {
+      function drawOrbiters() {
+        const g = orbitersGfx;
+        g.clear();
+        for (const o of orbiters) {
           o.angle += o.angleSpeed;
           o.pulse += 0.01;
           const spiralAngle = o.angle + o.spiralOffset + o.distance * o.spiralTightness * 0.01;
@@ -2423,27 +2333,72 @@
           const rawY = cy + Math.sin(spiralAngle) * o.distance;
           const proj = projectPoint(rawX, rawY);
           const pulseAlpha = o.opacity * (0.5 + 0.5 * Math.sin(o.pulse));
+          g.beginFill(o.color, pulseAlpha);
+          g.drawCircle(proj.x, proj.y, o.size);
+          g.endFill();
+          g.beginFill(0xFFFFFF, pulseAlpha * 0.5);
+          g.drawCircle(proj.x, proj.y, o.size * 0.4);
+          g.endFill();
+        }
+      }
 
-          ctx.save();
-          ctx.shadowBlur = o.size > 1.5 ? 6 : 3;
-          ctx.shadowColor = o.color;
-          ctx.beginPath();
-          ctx.arc(proj.x, proj.y, o.size, 0, Math.PI * 2);
-          ctx.fillStyle = o.color;
-          ctx.globalAlpha = pulseAlpha;
-          ctx.fill();
-          ctx.globalAlpha = 1;
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(proj.x, proj.y, o.size * 0.4, 0, Math.PI * 2);
-          ctx.globalAlpha = pulseAlpha * 0.5;
-          ctx.fill();
-          ctx.restore();
-        });
+      function drawSun() {
+        const g = sunGfx;
+        g.clear();
+        sunShimmerTime += 0.8;
+        const sunR = Math.min(width, height) * 0.034;
+
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          const wobble = 1 + Math.sin(sunShimmerTime * 0.025 + i * 0.9) * 0.06
+            + Math.sin(sunShimmerTime * 0.018 + i * 1.4) * 0.04;
+          const r = sunR * wobble;
+          g.beginFill(0xFF7814, 0.05);
+          g.drawCircle(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, sunR * 0.15);
+          g.endFill();
+        }
+        for (let i = 0; i < 16; i++) {
+          const angle = (i / 16) * Math.PI * 2 + sunShimmerTime * 0.003;
+          const r = sunR * (1.1 + Math.sin(sunShimmerTime * 0.02 + i * 1.3) * 0.08);
+          g.beginFill(0xFF5A0A, 0.05);
+          g.drawCircle(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, sunR * 0.25);
+          g.endFill();
+        }
+
+        g.beginFill(0xFFB347, 0.04);
+        g.drawCircle(cx, cy, sunR * 2.5);
+        g.endFill();
+        g.beginFill(0xFF8C00, 0.08);
+        g.drawCircle(cx, cy, sunR * 1.6);
+        g.endFill();
+        g.beginFill(0xFF6600, 0.15);
+        g.drawCircle(cx, cy, sunR * 1.15);
+        g.endFill();
+
+        g.beginFill(0xFFF5E0);
+        g.drawCircle(cx, cy, sunR);
+        g.endFill();
+        g.beginFill(0xFFCC66, 0.5);
+        g.drawCircle(cx - sunR * 0.1, cy - sunR * 0.1, sunR);
+        g.endFill();
+        g.lineStyle(sunR * 0.2, 0xE65700, 0.4);
+        g.drawCircle(cx, cy, sunR);
+        g.endFill();
+        g.beginFill(0xFF9933);
+        g.drawCircle(cx, cy, sunR * 0.85);
+        g.endFill();
+        g.beginFill(0xE65700);
+        g.drawCircle(cx, cy, sunR * 0.7);
+        g.endFill();
+        g.beginFill(0xFFF5E0);
+        g.drawCircle(cx - sunR * 0.15, cy - sunR * 0.15, sunR * 0.4);
+        g.endFill();
       }
 
       function drawPlanets() {
-        planets.forEach(p => {
+        const g = planetsGfx;
+        g.clear();
+        for (const p of planets) {
           p.angle += p.speed;
           p.pulse += 0.015;
           p.orbitPulse += 0.008;
@@ -2455,205 +2410,65 @@
           const pulseScale = 1 + 0.1 * Math.sin(p.pulse);
           const size = p.size * pulseScale;
 
-          ctx.save();
-
-          // ─── Saturn ring (behind planet first) ───
           if (p.hasRing) {
             p.ringAngle += 0.002;
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(p.ringAngle);
-
-            // Outer ring
-            ctx.beginPath();
-            ctx.ellipse(0, 0, size * 2.8, size * 0.55, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = '#C9A86C88';
-            ctx.lineWidth = 3;
-            ctx.stroke();
-
-            // Inner ring
-            ctx.beginPath();
-            ctx.ellipse(0, 0, size * 2.2, size * 0.42, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = '#E8D5A3aa';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Ring gap
-            ctx.beginPath();
-            ctx.ellipse(0, 0, size * 1.9, size * 0.36, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(9,10,20,0.5)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            ctx.restore();
+            g.lineStyle(3, 0xC9A86C, 1);
+            g.drawEllipse(p.x, p.y, size * 2.8, size * 0.55);
+            g.lineStyle(2, 0xE8D5A3, 1);
+            g.drawEllipse(p.x, p.y, size * 2.2, size * 0.42);
+            g.lineStyle(1.5, 0x090A14, 0.5);
+            g.drawEllipse(p.x, p.y, size * 1.9, size * 0.36);
           }
 
-          // ─── Glow aura ───
-          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3.5);
-          grd.addColorStop(0, p.glow + '40');
-          grd.addColorStop(0.5, p.glow + '15');
-          grd.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = grd;
-          ctx.globalAlpha = 0.4 + 0.2 * Math.sin(p.pulse);
-          ctx.fill();
-          ctx.globalAlpha = 1;
+          g.beginFill(p.glow, 0.1);
+          g.drawCircle(p.x, p.y, size * 3.5);
+          g.endFill();
+          g.beginFill(p.glow, 0.05);
+          g.drawCircle(p.x, p.y, size * 2);
+          g.endFill();
 
-          // ─── Planet surface (per type) ───
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = p.glow;
+          g.beginFill(p.color);
+          g.drawCircle(p.x, p.y, size);
+          g.endFill();
 
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-
-          if (p.name === 'Mercury') {
-            // Gray rocky with craters
-            const mGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            mGrd.addColorStop(0, '#E0E0E0');
-            mGrd.addColorStop(0.5, '#9E9E9E');
-            mGrd.addColorStop(1, '#4A4A4A');
-            ctx.fillStyle = mGrd;
-          } else if (p.name === 'Venus') {
-            // Thick yellow-orange atmosphere swirl
-            const vGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            vGrd.addColorStop(0, '#FFF8E1');
-            vGrd.addColorStop(0.4, '#FFE0B2');
-            vGrd.addColorStop(0.8, '#E8C89A');
-            vGrd.addColorStop(1, '#A0784A');
-            ctx.fillStyle = vGrd;
-          } else if (p.name === 'Earth') {
-            // Blue with green continents
-            const eGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            eGrd.addColorStop(0, '#B3E5FC');
-            eGrd.addColorStop(0.35, '#4FC3F7');
-            eGrd.addColorStop(0.65, '#1565C0');
-            eGrd.addColorStop(1, '#0D47A1');
-            ctx.fillStyle = eGrd;
-            ctx.fill();
-            ctx.save();
-            ctx.clip();
-            // Continents
+          if (p.name === 'Earth') {
             const cAngle = p.angle * 0.5;
-            ctx.beginPath();
-            ctx.arc(p.x + Math.cos(cAngle) * size * 0.3, p.y + Math.sin(cAngle * 0.8) * size * 0.3, size * 0.35, 0, Math.PI * 2);
-            ctx.fillStyle = '#2E8B57';
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(p.x + Math.cos(cAngle + 2.1) * size * 0.4, p.y + Math.sin(cAngle * 0.6 + 1) * size * 0.25, size * 0.22, 0, Math.PI * 2);
-            ctx.fillStyle = '#388E3C';
-            ctx.fill();
-            ctx.restore();
-          } else if (p.name === 'Mars') {
-            // Red rust with polar caps
-            const mGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            mGrd.addColorStop(0, '#FF8A65');
-            mGrd.addColorStop(0.5, '#C62828');
-            mGrd.addColorStop(1, '#6D1A1A');
-            ctx.fillStyle = mGrd;
+            g.beginFill(0x2E8B57);
+            g.drawCircle(p.x + Math.cos(cAngle) * size * 0.3, p.y + Math.sin(cAngle * 0.8) * size * 0.3, size * 0.35);
+            g.endFill();
+            g.beginFill(0x388E3C);
+            g.drawCircle(p.x + Math.cos(cAngle + 2.1) * size * 0.4, p.y + Math.sin(cAngle * 0.6 + 1) * size * 0.25, size * 0.22);
+            g.endFill();
           } else if (p.name === 'Jupiter') {
-            // Brown with orange stripes
-            const jGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            jGrd.addColorStop(0, '#FFCC80');
-            jGrd.addColorStop(0.3, '#C88B3A');
-            jGrd.addColorStop(0.55, '#A05C2C');
-            jGrd.addColorStop(0.75, '#D4A055');
-            jGrd.addColorStop(1, '#8B4513');
-            ctx.fillStyle = jGrd;
-            ctx.fill();
-            ctx.save();
-            ctx.clip();
-            // Jupiter bands
             const bandOffset = Math.sin(p.orbitPulse) * 2;
             const bands = [
-              { y: -0.7, h: 0.18, color: '#D4956A' },
-              { y: -0.3, h: 0.12, color: '#F5DEB3' },
-              { y: 0.1, h: 0.2, color: '#C88B3A' },
-              { y: 0.45, h: 0.15, color: '#DEB887' },
+              { y: -0.7, h: 0.18, color: 0xD4956A },
+              { y: -0.3, h: 0.12, color: 0xF5DEB3 },
+              { y: 0.1, h: 0.2, color: 0xC88B3A },
+              { y: 0.45, h: 0.15, color: 0xDEB887 },
             ];
-            bands.forEach(b => {
-              ctx.beginPath();
-              ctx.ellipse(p.x, p.y + (b.y + b.h / 2 + bandOffset * 0.05) * size, size * 0.95, b.h * size * 0.5, 0, 0, Math.PI * 2);
-              ctx.fillStyle = b.color;
-              ctx.globalAlpha = 0.6;
-              ctx.fill();
-            });
-            // Great Red Spot
-            ctx.beginPath();
-            ctx.ellipse(p.x + size * 0.25, p.y + size * 0.15, size * 0.18, size * 0.1, 0.3, 0, Math.PI * 2);
-            ctx.fillStyle = '#C0392B';
-            ctx.globalAlpha = 0.7;
-            ctx.fill();
-            ctx.restore();
-          } else if (p.name === 'Saturn') {
-            // Yellow-beige with bands
-            const sGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            sGrd.addColorStop(0, '#FFF8DC');
-            sGrd.addColorStop(0.4, '#E8D5A3');
-            sGrd.addColorStop(0.8, '#C9A86C');
-            sGrd.addColorStop(1, '#8B7355');
-            ctx.fillStyle = sGrd;
-          } else if (p.name === 'Pluto') {
-            // Ice dwarf - pale blue-gray
-            const plGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            plGrd.addColorStop(0, '#E8E0D8');
-            plGrd.addColorStop(0.5, '#B0A090');
-            plGrd.addColorStop(1, '#6B5B4F');
-            ctx.fillStyle = plGrd;
-          } else {
-            // Default
-            const dGrd = ctx.createRadialGradient(p.x - size * 0.35, p.y - size * 0.35, 0, p.x, p.y, size);
-            dGrd.addColorStop(0, '#FFD4A8');
-            dGrd.addColorStop(0.5, p.color);
-            dGrd.addColorStop(1, '#8B3A1A');
-            ctx.fillStyle = dGrd;
+            for (const b of bands) {
+              const by = p.y + (b.y + b.h / 2 + bandOffset * 0.05) * size;
+              g.beginFill(b.color, 0.6);
+              g.drawEllipse(p.x, by, size * 0.95, b.h * size * 0.5);
+              g.endFill();
+            }
+            g.beginFill(0xC0392B, 0.7);
+            g.drawEllipse(p.x + size * 0.25, p.y + size * 0.15, size * 0.18, size * 0.1);
+            g.endFill();
           }
 
-          ctx.fill();
-
-          // Crisp rim edge
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-
-          ctx.restore();
-        });
-      }
-
-      function drawStars(time) {
-        stars.forEach(s => {
-          s.twinkle += s.twinkleSpeed;
-          const alpha = s.opacity * (0.4 + 0.6 * Math.sin(s.twinkle));
-          ctx.save();
-          if (s.size > 1.2) {
-            ctx.shadowBlur = 4;
-            ctx.shadowColor = s.color;
-          }
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-          ctx.fillStyle = s.color;
-          ctx.globalAlpha = alpha;
-          ctx.fill();
-          // Bright core
-          ctx.globalAlpha = alpha * 0.8;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
-          ctx.fillStyle = '#ffffff';
-          ctx.fill();
-          ctx.restore();
-        });
+          g.lineStyle(0.8, 0xFFFFFF, 0.18);
+          g.drawCircle(p.x, p.y, size);
+          g.endFill();
+        }
       }
 
       function updateShootingStars(time) {
         if (time - lastShootTime > SHOOT_INTERVAL + Math.random() * 5000) {
-          // Spawn shooting star
-          const startX = width * (0.4 + Math.random() * 0.5);
-          const startY = height * (0.1 + Math.random() * 0.3);
           shootingStars.push({
-            x: startX,
-            y: startY,
+            x: width * (0.4 + Math.random() * 0.5),
+            y: height * (0.1 + Math.random() * 0.3),
             vx: -(30 + Math.random() * 40),
             vy: (15 + Math.random() * 20),
             life: 1.0,
@@ -2662,69 +2477,51 @@
           });
           lastShootTime = time;
         }
-
         for (let i = shootingStars.length - 1; i >= 0; i--) {
           const s = shootingStars[i];
           s.x += s.vx;
           s.y += s.vy;
           s.life -= s.decay;
-
           if (s.life <= 0 || s.x < -50 || s.y > height + 50) {
             shootingStars.splice(i, 1);
-          } else {
-            const angle = Math.atan2(s.vy, s.vx);
-            ctx.save();
-            ctx.globalAlpha = s.life * 0.8;
-            const grd = ctx.createLinearGradient(
-              s.x, s.y,
-              s.x + Math.cos(angle) * s.width, s.y + Math.sin(angle) * s.width
-            );
-            grd.addColorStop(0, 'transparent');
-            grd.addColorStop(0.3, '#FFD70088');
-            grd.addColorStop(0.7, '#FFD700');
-            grd.addColorStop(1, '#FFFFFF');
-            ctx.beginPath();
-            ctx.moveTo(s.x, s.y);
-            ctx.lineTo(s.x + Math.cos(angle) * s.width, s.y + Math.sin(angle) * s.width);
-            ctx.strokeStyle = grd;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            // Head glow
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, 2.5, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = '#FFD700';
-            ctx.fill();
-            ctx.restore();
           }
         }
       }
 
-      function draw() {
-        ctx.clearRect(0, 0, width, height);
-        const time = performance.now();
-
-        drawSun();
-        drawSpiralArms();
-        drawOrbiters(time);
-        drawPlanets();
-        updateShootingStars(time);
-        drawStars(time);
-
-        rafId = requestAnimationFrame(draw);
+      function drawShootingStars() {
+        const g = shootingGfx;
+        g.clear();
+        for (const s of shootingStars) {
+          const angle = Math.atan2(s.vy, s.vx);
+          const tailX = Math.cos(angle) * s.width;
+          const tailY = Math.sin(angle) * s.width;
+          g.lineStyle(2, 0xFFD700, s.life * 0.8);
+          g.moveTo(s.x, s.y);
+          g.lineTo(s.x + tailX, s.y + tailY);
+          g.beginFill(0xFFD700, s.life * 0.5);
+          g.drawCircle(s.x, s.y, 2);
+          g.endFill();
+          g.beginFill(0xFFFFFF, s.life);
+          g.drawCircle(s.x, s.y, 1.5);
+          g.endFill();
+        }
       }
 
       resize();
       window.addEventListener('resize', resize, { passive: true });
 
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId = null; }
-        else if (!document.hidden && !rafId) { draw(); }
+      app.ticker.add(() => {
+        const time = performance.now();
+        drawStars();
+        drawSpiralArms();
+        drawOrbiters();
+        drawSun();
+        drawPlanets();
+        updateShootingStars(time);
+        drawShootingStars();
       });
-
-      draw();
     })();
+
 
     // ─── Hero Carousel ───
     (function initCarousel() {
